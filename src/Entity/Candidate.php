@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CandidateRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -83,21 +85,6 @@ class Candidate
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $confirmEmail;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $confirmPassword;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $availability;
@@ -133,15 +120,20 @@ class Candidate
     private $deletedAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $files;
-
-    /**
      * @ORM\ManyToOne(targetEntity=JobCategory::class, inversedBy="candidates")
      * @ORM\JoinColumn(nullable=false)
      */
     private $jobCategory;
+
+    /**
+     * @ORM\OneToMany(targetEntity=File::class, mappedBy="candidate")
+     */
+    private $files;
+
+    public function __construct()
+    {
+        $this->files = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -304,42 +296,6 @@ class Candidate
         return $this;
     }
 
-    public function getConfirmEmail(): ?string
-    {
-        return $this->confirmEmail;
-    }
-
-    public function setConfirmEmail(string $confirmEmail): self
-    {
-        $this->confirmEmail = $confirmEmail;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    public function getConfirmPassword(): ?string
-    {
-        return $this->confirmPassword;
-    }
-
-    public function setConfirmPassword(string $confirmPassword): self
-    {
-        $this->confirmPassword = $confirmPassword;
-
-        return $this;
-    }
-
     public function getAvailability(): ?bool
     {
         return $this->availability;
@@ -424,18 +380,6 @@ class Candidate
         return $this;
     }
 
-    public function getFiles(): ?string
-    {
-        return $this->files;
-    }
-
-    public function setFiles(string $files): self
-    {
-        $this->files = $files;
-
-        return $this;
-    }
-
     public function getJobCategory(): ?JobCategory
     {
         return $this->jobCategory;
@@ -444,6 +388,37 @@ class Candidate
     public function setJobCategory(?JobCategory $jobCategory): self
     {
         $this->jobCategory = $jobCategory;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|File[]
+     */
+    public function getFiles(): Collection
+    {
+        return $this->files;
+    }
+
+    public function addFile(File $file): self
+    {
+        if (!$this->files->contains($file)) {
+            $this->files[] = $file;
+            $file->setCandidate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFile(File $file): self
+    {
+        if ($this->files->contains($file)) {
+            $this->files->removeElement($file);
+            // set the owning side to null (unless already changed)
+            if ($file->getCandidate() === $this) {
+                $file->setCandidate(null);
+            }
+        }
 
         return $this;
     }
