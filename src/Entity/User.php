@@ -40,6 +40,11 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+    /**
+     * @ORM\OneToOne(targetEntity=Candidate::class, inversedBy="user", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idCandidate;
 
     public function getId(): ?int
     {
@@ -127,6 +132,15 @@ class User implements UserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+    public function getIdCandidate(): ?Candidate
+    {
+        return $this->idCandidate;
+    }
+
+    public function setIdCandidate(Candidate $idCandidate): self
+    {
+        $this->idCandidate = $idCandidate;
 
         return $this;
     }
