@@ -94,7 +94,10 @@
         "version": "2.2.3"
     },
     "php": {
-        "version": "7.2"
+        "version": "7.4"
+    },
+    "php-imap/php-imap": {
+        "version": "4.1.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -131,6 +134,15 @@
         "files": [
             "config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "symfony/amazon-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "9648db3ecae5c8a6b1a5f74715d3907124348815"
+        }
     },
     "symfony/asset": {
         "version": "v5.1.2"
@@ -261,6 +273,15 @@
     },
     "symfony/intl": {
         "version": "v5.1.2"
+    },
+    "symfony/mailchimp-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "1be490e068472fc87e226cf54bc95fb6f2e49117"
+        }
     },
     "symfony/mailer": {
         "version": "4.3",
@@ -408,6 +429,15 @@
     "symfony/security-http": {
         "version": "v5.1.2"
     },
+    "symfony/sendgrid-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "b46e4f8f1adb2864f0aa9c0ff57aea3324a07199"
+        }
+    },
     "symfony/serializer": {
         "version": "v5.1.2"
     },
@@ -500,6 +530,9 @@
     },
     "symfony/yaml": {
         "version": "v5.1.2"
+    },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.0.0"
     },
     "twig/extra-bundle": {
         "version": "v3.0.4"
