@@ -37,10 +37,6 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isVerified = false;
-    /**
      * @ORM\OneToOne(targetEntity=Candidate::class, inversedBy="user", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
@@ -124,14 +120,6 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function isVerified(): bool
-    {
-        return $this->isVerified;
-    }
-
-    public function setIsVerified(bool $isVerified): self
-    {
-        $this->isVerified = $isVerified;
 
     public function getIdCandidate(): ?Candidate
     {
