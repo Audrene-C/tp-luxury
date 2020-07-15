@@ -7,11 +7,14 @@
 /public/bundles/
 /var/
 /vendor/
+/.idea/workspace.xml.
+
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
 .phpunit
 .phpunit.result.cache
 .htaccess
+/.composer.lock
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
