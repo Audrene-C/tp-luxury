@@ -20,6 +20,3 @@
 /.symfony.lock
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
-/.composer.json
-/.composer.lock
-/.symfony.lock
