@@ -15,8 +15,8 @@
 .phpunit
 .phpunit.result.cache
 .htaccess
-composer.lock
-composer.json
-symfony.lock
+/composer.lock
+/composer.json
+/symfony.lock
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
