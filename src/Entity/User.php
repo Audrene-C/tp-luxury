@@ -42,6 +42,11 @@ class User implements UserInterface
      */
     private $idCandidate;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isAdmin;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,6 +82,10 @@ class User implements UserInterface
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
+
+        if($this->getIsAdmin() == 0) {
+            $roles[] = 'ROLE_ADMIN';
+        }
 
         return array_unique($roles);
     }
@@ -129,6 +138,18 @@ class User implements UserInterface
     public function setIdCandidate(Candidate $idCandidate): self
     {
         $this->idCandidate = $idCandidate;
+
+        return $this;
+    }
+
+    public function getIsAdmin(): ?bool
+    {
+        return $this->isAdmin;
+    }
+
+    public function setIsAdmin(bool $isAdmin): self
+    {
+        $this->isAdmin = $isAdmin;
 
         return $this;
     }
