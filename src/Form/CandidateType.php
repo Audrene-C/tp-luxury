@@ -17,7 +17,8 @@ class CandidateType extends AbstractType
                 'choices' => [
                     'Male' => 0,
                     'Female' => 1,
-            ]]
+                    ]
+                ]
             )
             ->add('first_name')
             ->add('last_name')

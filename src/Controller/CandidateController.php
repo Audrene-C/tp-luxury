@@ -11,23 +11,29 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CandidateController extends AbstractController
 {
-    // /**
-    //  * @Route("/candidate", name="candidate")
-    //  */
-    // public function index()
-    // {
-    //     return $this->render('candidate/index.html.twig', [
-    //         'controller_name' => 'CandidateController',
-    //     ]);
-    // }
+
 
     /**
-     * @Route("/candidate/{id}", name="candidate", methods={"GET", "POST"})
+     * @Route("/candidate/formCandidate", name="candidate", methods={"GET", "POST"})
      */
-    public function account(Request $request): Response
+    public function add(Request $request): Response
     {
         $candidate = new Candidate();
         $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $candidate->getFirstName();
+            $candidate->getLastName();
+            $candidate->getEmail();
+            $entityManager->persist($candidate);
+            $entityManager->flush();
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('candidate/formCandidate.html.twig', [
+            'candidate' => $candidate,
+        ]);
     }
+
+
 }
