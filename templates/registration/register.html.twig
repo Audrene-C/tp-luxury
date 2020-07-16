@@ -8,13 +8,13 @@
     {% endfor %}
 
     <h1>Register</h1>
-{# add isadmin hidden #}
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
+        {{ form_widget(registrationForm.isAdmin, {'attr' : {'type': 'hidden'}, 'attr' : {'value': 0} } ) }}
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
