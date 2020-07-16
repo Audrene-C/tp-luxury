@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface
 {
@@ -36,9 +38,14 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToOne(targetEntity=Candidate::class, inversedBy="user", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $idCandidate;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isAdmin;
 
     public function getId(): ?int
     {
@@ -75,6 +82,11 @@ class User implements UserInterface
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
+        if($this->getIsAdmin()) {
+
+            $roles[] = 'ROLE_ADMIN';
+
+        }
 
         return array_unique($roles);
     }
@@ -118,6 +130,7 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+
     public function getIdCandidate(): ?Candidate
     {
         return $this->idCandidate;
@@ -126,6 +139,18 @@ class User implements UserInterface
     public function setIdCandidate(Candidate $idCandidate): self
     {
         $this->idCandidate = $idCandidate;
+
+        return $this;
+    }
+
+    public function getIsAdmin(): ?bool
+    {
+        return $this->isAdmin;
+    }
+
+    public function setIsAdmin(bool $isAdmin): self
+    {
+        $this->isAdmin = $isAdmin;
 
         return $this;
     }

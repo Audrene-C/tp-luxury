@@ -18,4 +18,19 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig');
     }
     
+
+        //dd($this->getUser());
+        return $this->render('home/index.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
+
+    /**
+     * @Route("/admin", name="admin")
+     */
+    public function admin()
+    {
+        //dd($this->getUser());
+        return $this->render('home/admin.html.twig');
+    }
 }
