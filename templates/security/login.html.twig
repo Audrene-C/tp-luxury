@@ -31,18 +31,20 @@
                     <div class="col-xs-12 col-sm-6 col-md-4">
                         <div class="card card-panel">
                             <h3 class="text-extrabold">Log in to your account</h3>
-                            <form id="login-form" role="form" method="post" accept-char="UTF-8" autocomplete="off" data-parsley-validate>
+                            <form id="login-form" role="form" method="post" action="{{ path('login') }}" accept-char="UTF-8" autocomplete="off" data-parsley-validate>
                                 {% if error %}
                                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                                 {% endif %}
 
                                 {% if app.user %}
                                     <div class="mb-3">
-                                        You are logged in as {{ app.user.username }}, <a href="{{ path('login') }}">Logout</a>
+                                        You are logged in as {{ app.user.username }}, <a href="{{ path('logout') }}">Logout</a>
                                     </div>
                                 {% endif %}
 
                                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                                <input type="hidden" name="isAdmin" value="0">
 
                                 <div class="input-field">
                                     <input type="email" name="email" id="inputEmail" value="{{ last_username }}"
