@@ -82,9 +82,10 @@ class User implements UserInterface
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
+        if($this->getIsAdmin()) {
 
-        if($this->getIsAdmin() == 1) {
             $roles[] = 'ROLE_ADMIN';
+
         }
 
         return array_unique($roles);

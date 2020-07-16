@@ -8,7 +8,7 @@
     {% endfor %}
 
     <h1>Register</h1>
-
+{# add isadmin hidden #}
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword, {
