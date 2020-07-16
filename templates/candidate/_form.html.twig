@@ -1,0 +1,11 @@
+<div class="container">
+    {{ form_start(form, {'attr' : {'method': 'post'}}) }}
+        <div class="row">
+            <div class="input-field col s12 l6">
+                {{ form_widget(form.gender, 'Votre Sexe') }}
+            </div>
+        </div>        
+        {{ form_widget(form.name, 'Votre Nom')}}
+        {{ form_widget(form.email, 'Votre Email')}}
+    {{ form_end(form) }}
+</div>
