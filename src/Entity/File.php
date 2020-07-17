@@ -2,28 +2,39 @@
 
 namespace App\Entity;
 
-use App\Repository\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=FileRepository::class)
+ * File
+ *
+ * @ORM\Table(name="file", indexes={@ORM\Index(name="IDX_8C9F361091BD8781", columns={"candidate_id"})})
+ * @ORM\Entity
  */
 class File
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="file_name", type="string", length=255, nullable=false)
      */
     private $fileName;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Candidate::class, inversedBy="files")
+     * @var \Candidate
+     *
+     * @ORM\ManyToOne(targetEntity="Candidate")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="candidate_id", referencedColumnName="id")
+     * })
      */
     private $candidate;
 

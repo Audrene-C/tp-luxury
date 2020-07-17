@@ -2,51 +2,63 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * User
+ *
+ * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C74", columns={"email"}), @ORM\UniqueConstraint(name="UNIQ_8D93D649B27CF2F3", columns={"id_candidate_id"})})
+ * @ORM\Entity
  */
 class User implements UserInterface
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=180, nullable=false)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="json")
+     * @var string|null
+     *
+     * @ORM\Column(name="roles", type="text", length=0, nullable=true, options={"default"="NULL"})
      */
     private $roles = [];
 
     /**
-     * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     private $password;
 
     /**
-     * @ORM\OneToOne(targetEntity=Candidate::class, inversedBy="user", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $idCandidate;
-
-    /**
-     * @ORM\Column(type="boolean")
+     * @var bool
+     *
+     * @ORM\Column(name="is_admin", type="boolean", nullable=false)
      */
     private $isAdmin;
 
+    /**
+     * @var \Candidate
+     *
+     * @ORM\ManyToOne(targetEntity="Candidate")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_candidate_id", referencedColumnName="id")
+     * })
+     */
+    private $idCandidate;
     public function getId(): ?int
     {
         return $this->id;
@@ -64,7 +76,7 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
+        /**
      * A visual identifier that represents this user.
      *
      * @see UserInterface
@@ -74,36 +86,24 @@ class User implements UserInterface
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
-        if($this->getIsAdmin()) {
-
-            $roles[] = 'ROLE_ADMIN';
-
-        }
-
         return array_unique($roles);
+
     }
 
-    public function setRoles(array $roles): self
+    public function setRoles(string $roles): self
     {
         $this->roles = $roles;
 
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -130,19 +130,6 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-
-    public function getIdCandidate(): ?Candidate
-    {
-        return $this->idCandidate;
-    }
-
-    public function setIdCandidate(Candidate $idCandidate): self
-    {
-        $this->idCandidate = $idCandidate;
-
-        return $this;
-    }
-
     public function getIsAdmin(): ?bool
     {
         return $this->isAdmin;
@@ -154,4 +141,18 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getIdCandidate(): ?Candidate
+    {
+        return $this->idCandidate;
+    }
+
+    public function setIdCandidate(?Candidate $idCandidate): self
+    {
+        $this->idCandidate = $idCandidate;
+
+        return $this;
+    }
+
+
 }

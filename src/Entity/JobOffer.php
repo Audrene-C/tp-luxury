@@ -2,77 +2,107 @@
 
 namespace App\Entity;
 
-use App\Repository\JobOfferRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=JobOfferRepository::class)
+ * JobOffer
+ *
+ * @ORM\Table(name="job_offer", indexes={@ORM\Index(name="IDX_288A3A4EDC2902E0", columns={"client_id_id"}), @ORM\Index(name="IDX_288A3A4E712A86AB", columns={"job_category_id"})})
+ * @ORM\Entity
  */
 class JobOffer
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="jobOffers")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $clientId;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=false)
      */
     private $description;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @var bool
+     *
+     * @ORM\Column(name="active", type="boolean", nullable=false)
      */
     private $active;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="notes", type="string", length=255, nullable=false)
      */
     private $notes;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="job_title", type="string", length=255, nullable=false)
      */
     private $jobTitle;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="contract_type", type="string", length=255, nullable=false)
      */
     private $contractType;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="location", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $location;
 
     /**
-     * @ORM\ManyToOne(targetEntity=JobCategory::class, inversedBy="jobOffers")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $jobCategory;
-
-    /**
-     * @ORM\Column(type="date", nullable=true)
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="closing_date", type="date", nullable=true, options={"default"="NULL"})
      */
     private $closingDate;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var int|null
+     *
+     * @ORM\Column(name="salary", type="integer", nullable=true, options={"default"="NULL"})
      */
     private $salary;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
     private $createdAt;
+
+    /**
+     * @var \JobCategory
+     *
+     * @ORM\ManyToOne(targetEntity="JobCategory")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="job_category_id", referencedColumnName="id")
+     * })
+     */
+    private $jobCategory;
+
+    /**
+     * @var \Client
+     *
+     * @ORM\ManyToOne(targetEntity="Client")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="client_id_id", referencedColumnName="id")
+     * })
+     */
+    private $clientId;
 
     public function getId(): ?int
     {
