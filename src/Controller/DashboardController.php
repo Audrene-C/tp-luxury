@@ -5,13 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class JobsOffersController extends AbstractController
+class DashboardController extends AbstractController
 {
     /**
-     * @Route("/profile/jobs_offers", name="jobs_offers")
+     * @Route("/admin/dashboard", name="dashboard")
      */
     public function index()
     {
-        return $this->render('jobs_offers/index.html.twig');
+        return $this->render('dashboard/dashboard.html.twig');
     }
 }

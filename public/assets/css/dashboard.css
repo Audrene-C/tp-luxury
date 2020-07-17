@@ -1,3 +1,19 @@
-body{
-    background-color: #6D6E73;
+header{
+    height: 150px;
+}
+
+h1{
+    margin: 150px;
+}
+
+.content-dashboard{
+    text-align: center;
+}
+
+.content-dashboard-row{
+    margin-top: 150px;
+}
+
+.card-panel-dashboard{
+    border-radius: 10px;
 }
