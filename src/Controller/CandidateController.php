@@ -83,7 +83,6 @@ class CandidateController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
     /**
      * @Route("/{id}", name="candidate_delete", methods={"DELETE"})
      */
@@ -97,4 +96,5 @@ class CandidateController extends AbstractController
 
         return $this->redirectToRoute('candidate_index');
     }
+
 }
