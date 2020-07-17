@@ -23,15 +23,13 @@ class CandidateController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $candidate->getFirstName();
-            $candidate->getLastName();
-            $candidate->getEmail();
             $entityManager->persist($candidate);
             $entityManager->flush();
             return $this->redirectToRoute('home');
         }
         return $this->render('candidate/formCandidate.html.twig', [
             'candidate' => $candidate,
+            'form' => $form->createView(),
         ]);
     }
 

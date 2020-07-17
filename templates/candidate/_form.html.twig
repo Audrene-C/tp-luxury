@@ -1,12 +1,89 @@
-<div class="container">
-    {{ form_start(form, {'attr' : {'method': 'post'}}) }}
+{{ form_start(form, {'attr' : {'method': 'post'}}) }}
+<section class="section-padding">
+    <div class="container">
         <div class="row">
-            <div class="input-field col s12 l6">
-                {{ form_widget(form.gender, 'Votre Sexe') }}
+            <h3 class="text-extrabold">Your personal informations</h3>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="input-field">
+                    {{ form_label(form.gender, 'Gender', {'label_attr' : {'class': 'active'}}) }}
+                    {{ form_widget(form.gender, {'attr' : {'class': 'test'}}) }}
+                </div>
             </div>
-        </div>        
-        {{ form_widget(form.first_name, 'Votre Prénom')}}
-        {{ form_widget(form.last_name, 'Votre Nom')}}
-        {{ form_widget(form.email, 'Votre Email')}}
-    {{ form_end(form) }}
-</div>
+            <div class="clearfix visible-sm"></div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="input-field">
+                    {{ form_label(form.firstName, 'Firstname') }}
+                    {{ form_widget(form.firstName) }}
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="input-field">
+                    {{ form_label(form.lastName, 'Lastname') }}
+                    {{ form_widget(form.lastName)}}
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="input-field">
+                    {{ form_label(form.currentLocation, 'Current Location') }}
+                    {{ form_widget(form.currentLocation) }}
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <div class="input-field">
+                    {{ form_label(form.adress, 'Address') }}
+                    {{ form_widget(form.adress) }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="file-field input-field"
+                     style="margin-top: 32px;">
+                    <div class="btn btn-lg primary waves-effect waves-light">
+                        <span><i class="material-icons">insert_photo</i> Photo</span>
+                        {{ form_widget(form.profilPicture, {'attr' : {'accept': '.pdf,.jpg,.doc,.docx,.png,.gif', 'size': '20000000'}} ) }}
+                    </div>
+
+                    <div class="existing-file">
+                        <a href="#!" target="_blank"><i class="material-icons">&#xE24D;</i> profil_picture.jpg</a>
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Upload your ID photo" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="input-field">
+                            <input id="country" name="country" type="text" value="">
+                            <label for="country">Country</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="input-field">
+                            <input id="nationality" name="nationality" type="text" value="">
+                            <label for="nationality">Nationality</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="input-field">
+                            <input class="datepicker" id="birth_date" name="birth_date" type="text" value="">
+                            <label for="birth_date">Birthdate</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="input-field">
+                            <input id="birth_place" name="birth_place" type="text" value="">
+                            <label for="birth_place">Birthplace</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+{{ form_end(form) }}
