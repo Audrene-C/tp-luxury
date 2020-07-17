@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Candidate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,9 +21,13 @@ class CandidateType extends AbstractType
                     ]
                 ]
             )
-            ->add('first_name')
-            ->add('last_name')
-            ->add('email')
+            ->add('firstName')
+            ->add('lastName')
+            ->add('currentLocation')
+            ->add('adress')
+            ->add('profilPicture', FileType::class, [
+                'mapped' => false
+            ])
         ;
     }
 
