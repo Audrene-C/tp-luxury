@@ -11,14 +11,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email')
-            ->add('isAdmin')
+            ->add('email', EmailType::class, [
+            'constraints' => [
+                new Email(['message' => 'Please enter a valid email address.'])
+                ]
+            ])
+            ->add('isAdmin', HiddenType::class, [
+                'data' => 1,
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -27,9 +37,10 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('plainPassword', PasswordType::class, [
+            ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
+                'type' => PasswordType::class,
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
@@ -42,7 +53,10 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-            ])
+                'first_options' => ['label' => 'Password'],
+                'second_options' => ['label' => 'Confirm Password'],
+                'invalid_message' => 'Your password does not match the confirmation.'
+             ])
         ;
     }
 

@@ -32,6 +32,4 @@ class CandidateController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-
 }

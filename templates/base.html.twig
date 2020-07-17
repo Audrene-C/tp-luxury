@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="icon-wrapper">
                         <span class="account">
-							<a href="/templates/auth/profile.html">
+							<a href="{{path('formCandidate')}}">
                                 <i class="material-icons">&#xE7FD;</i>
                             </a>
 						</span>
@@ -107,13 +107,13 @@
                                 <div class="nav-overlay" id="overlay">
                                     <nav class="overlay-menu">
                                         <ul>
-                                            <li><a href="/">Home</a></li>
+                                            <li><a href="{{path('home')}}">Home</a></li>
                                             <li><a href="{{path('jobs_offers')}}">Jobs Offers</a></li>
                                             <li><a href="{{path('about_us')}}">About Us</a></li>
                                             <li><a href="{{path('contact')}}">Contact</a></li>
                                             <li>-</li>
-                                            <li><a href="/templates/authentification/profile.html.twig">Profile</a></li>
-                                            <li><a href="/logout.html">Logout</a></li>
+                                            <li><a href="{{path('formCandidate')}}">Profile</a></li>
+                                            <li><a href="{{path('app_logout')}}">Logout</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -126,7 +126,7 @@
                                         </a>
                                     </li>
                                     <li class=" dropdown">
-                                        <a target="_self" href="/templates/auth/register.html" class="btn bn-lg gradient secondary btn-block waves-effect waves-light btn-register">
+                                        <a target="_self" href="{{path('app_register')}}" class="btn bn-lg gradient secondary btn-block waves-effect waves-light btn-register">
                                             <span>Sign Up</span>
                                         </a>
 
@@ -134,7 +134,7 @@
                                 </ul>
                                 <ul class="menuzord-menu pull-right light" role="navigation">
                                     <li class="active dropdown">
-                                        <a target="_self" href="/">
+                                        <a target="_self" href="{{path('home')}}">
                                             <i class=""></i>
                                             <span>Home</span>
                                         </a>
@@ -203,7 +203,7 @@
                     <div class="container">
                         <ul class="" role="navigation">
                             <li class="active dropdown">
-                                <a target="_self" href="/">
+                                <a target="_self" href="{{path('home')}}">
                                     <span>Home</span>
                                 </a>
                             </li>
