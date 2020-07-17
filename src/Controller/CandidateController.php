@@ -12,8 +12,6 @@ class CandidateController extends AbstractController
      */
     public function index()
     {
-        return $this->render('candidate/index.html.twig', [
-            'controller_name' => 'CandidateController',
-        ]);
+        return $this->render('candidate/index.html.twig');
     }
 }

@@ -13,12 +13,10 @@ class ContactController extends AbstractController
     public function index()
     {
         if ($this->getUser()) {
-            return $this->render('contact/contact-log.html.twig');
+            return $this->render('contact_log/contact-log.html.twig');
         }
 
 
-        return $this->render('contact/index.html.twig', [
-            'controller_name' => 'ContactController',
-        ]);
+        return $this->render('contact/index.html.twig');
     }
 }
