@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CandidateController extends AbstractController
 {
     /**
-     * @Route("/candidate", name="candidate")
+     * @Route("/candidate", name="formCandidate")
      */
     public function index()
     {
