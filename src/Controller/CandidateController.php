@@ -14,7 +14,7 @@ class CandidateController extends AbstractController
 
 
     /**
-     * @Route("/candidate/formCandidate", name="candidate", methods={"GET", "POST"})
+     * @Route("/profile/candidate", name="candidate", methods={"GET", "POST"})
      */
     public function add(Request $request): Response
     {

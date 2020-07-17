@@ -113,7 +113,7 @@
                                             <li><a href="{{path('contact')}}">Contact</a></li>
                                             <li>-</li>
                                             {% if is_granted('ROLE_ADMIN') %}
-                                                <li><a href="{{path('home')}}">Dashboard</a></li>
+                                                <li><a href="{{path('dashboard')}}">Dashboard</a></li>
                                                 <li><a href="{{path('app_logout')}}">Logout</a></li>
                                             {% elseif is_granted('ROLE_USER') %}
                                                 <li><a href="{{path('candidate')}}">Profile</a></li>
