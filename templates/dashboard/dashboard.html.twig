@@ -36,8 +36,7 @@
 
 
 
-    <link href="/assets/css/main.css" rel="stylesheet">
-    <link href="{{ asset('public\assets\css\dashboard.css') }}" rel="stylesheet">
+    
 
     <link href="http://kys.idmkr.io/cache/assets/frontend.kys.materialize.a1042cadda540464eafd9350bb40433a_1547807689.css" rel="stylesheet">
     <link href="http://kys.idmkr.io/cache/assets/frontend.kys.bootstrap.457005dcd8ab887d5f47791eaa1e3a26_1547807834.css" rel="stylesheet">
@@ -81,38 +80,102 @@
     <script src="http://kys.idmkr.io/cache/assets/frontend.kys.revolution-ext-parallax.402830701f2cb1475353aa7335920e6b_1547807822.js"></script>
     <title>{% block title %}Dashboard{% endblock %}</title>
 
+{% block stylesheet %} 
+<link href="{{ asset('assets/css/dashboard.css') }}" rel="stylesheet">
+{% endblock %}
+
 </head>
 <body>
 
-    <!-- Navigation -->
-    <header>
-
+    <!-- header -->
+    {% block header %}
+    <header id="header" class="tt-nav transparent-header ">
+        <div class="header-sticky semi-transparent">
             <div class="container">
                 <h1 class="white-text text-bold text-uppercase no-margin">Dashboard</h1>
 
-
-
             </div>
+        </div>
     </header>
 
+    {% endblock %}
 
 
+    {% block content %}
     <div class="base">
     <div class="page">
-        <div class="container">
+        <div class="container content-dashboard">
+            <div class="row content-dashboard-row">
+                <div class="col-md-6 mb-50">
+                    <div class="card job-card">
+                        <div class="card-content">
+                            <span class="title">
+                                <span class="card-title">Candidats</span>
+                            </span>
+                            
+                            <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
+                        </div>
+                        <div class="card-action">
+                            <a class="btn-md btn gradient secondary waves-effect waves-light mt-30" href="/templates/jobs/show.html">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-50">
+                    <div class="card job-card">
+                        <div class="card-content">
+                            <span class="title">
+                                <span class="card-title">Clients</span>
+                            </span>
+                            
+                            <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
+                        </div>
+                        <div class="card-action">
+                            <a class="btn-md btn gradient secondary waves-effect waves-light mt-30" href="/templates/jobs/show.html">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
-                <div class="col-md-12 mb-40">
-                    <span class="white-text">Nombre de candidats</span>
+                <div class="col-md-6 mb-50">
+                    <div class="card job-card">
+                        <div class="card-content">
+                            <span class="title">
+                                <span class="card-title">Offres d'emploi</span>
+                            </span>
+                            
+                            <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
+                        </div>
+                        <div class="card-action">
+                            <a class="btn-md btn gradient secondary waves-effect waves-light mt-30" href="/templates/jobs/show.html">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-50">
+                    <div class="card job-card">
+                        <div class="card-content">
+                            <span class="title">
+                                <span class="card-title">Candidatures</span>
+                            </span>
+                            
+                            <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
+                        </div>
+                        <div class="card-action">
+                            <a class="btn-md btn gradient secondary waves-effect waves-light mt-30" href="/templates/jobs/show.html">Details</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
 
 
 
-
-
+{% block javascript %}
     <!-- RS5.0 Init  -->
     <script type="text/javascript">
         document.querySelector(".rev_slider_wrapper").setAttribute("style",
@@ -178,6 +241,7 @@
             });
         });
     </script>
+    {% endblock %}
 
 </body>
 </html>

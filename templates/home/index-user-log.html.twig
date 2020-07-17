@@ -1,5 +1,9 @@
 {% extends 'base-log.html.twig' %}
 
+{# {% if is_granted('ROLE_ADMIN') %}
+    <a href="...">Delete</a>
+{% endif %} #}
+
 {% block title %}HomePage{% endblock %}
 
 {% block body %}
@@ -233,7 +237,7 @@
                         </div>
 
                         <div class="text-center">
-                            <a href="/templates/company.html" class="btn gradient secondary waves-effect waves-light mt-40">More about us</a>
+                            <a href="{{path('about_us')}}" class="btn gradient secondary waves-effect waves-light mt-40">More about us</a>
                         </div>
                     </div>
                 </div>
@@ -306,7 +310,7 @@
                                             <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
                                         </div>
                                         <div class="card-action">
-                                            <a class="btn btn-md primary border waves-effect waves-dark" href="/templates/jobs/show.html">Details</a>
+                                            <a class="btn btn-md primary border waves-effect waves-dark" href="/templates/jobs_offers/show.html.twig">Details</a>
                                             <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
                                         </div>
                                     </div>
@@ -334,7 +338,7 @@
                                             <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
                                         </div>
                                         <div class="card-action">
-                                            <a class="btn btn-md primary border waves-effect waves-dark" href="/templates/jobs/show.html">Details</a>
+                                            <a class="btn btn-md primary border waves-effect waves-dark" href="/templates/jobs_offers/show.html.twig">Details</a>
                                             <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
                                         </div>
                                     </div>
@@ -362,7 +366,7 @@
                                             <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
                                         </div>
                                         <div class="card-action">
-                                            <a class="btn btn-md primary border waves-effect waves-dark" href="/templates/jobs/show.html">Details</a>
+                                            <a class="btn btn-md primary border waves-effect waves-dark" href="/templates/jobs_offers/show.html.twig">Details</a>
                                             <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
                                         </div>
                                     </div>
@@ -390,7 +394,7 @@
                                             <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
                                         </div>
                                         <div class="card-action">
-                                            <a class="btn btn-md primary border waves-effect waves-dark" href="/templates/jobs/show.html">Details</a>
+                                            <a class="btn btn-md primary border waves-effect waves-dark" href="/templates/jobs_offers/show.html.twig">Details</a>
                                             <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
                                         </div>
                                     </div>

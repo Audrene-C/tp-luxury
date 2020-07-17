@@ -5,13 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AuthentificationController extends AbstractController
+class DashboardController extends AbstractController
 {
     /**
-     * @Route("/authentification", name="authentification")
+     * @Route("/admin/dashboard", name="dashboard")
      */
     public function index()
     {
-        return $this->render('authentification/index.html.twig');
+        return $this->render('dashboard/dashboard.html.twig');
     }
 }
