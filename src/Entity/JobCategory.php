@@ -2,42 +2,32 @@
 
 namespace App\Entity;
 
-use App\Repository\JobCategoryRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity(repositoryClass=JobCategoryRepository::class)
+ * JobCategory
+ *
+ * @ORM\Table(name="job_category")
+ * @ORM\Entity
  */
 class JobCategory
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="category", type="string", length=255, nullable=false)
      */
     private $category;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Candidate::class, mappedBy="jobCategory")
-     */
-    private $candidates;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Client::class, mappedBy="jobCategory")
-     */
-    private $clients;
-
-    /**
-     * @ORM\OneToMany(targetEntity=JobOffer::class, mappedBy="jobCategory")
-     */
-    private $jobOffers;
 
     public function __construct()
     {
@@ -64,9 +54,9 @@ class JobCategory
     }
 
     /**
-     * @return Collection|Candidate[]
+     * @return Candidate[]
      */
-    public function getCandidates(): Collection
+    public function getCandidates(): Candidate
     {
         return $this->candidates;
     }
@@ -95,9 +85,9 @@ class JobCategory
     }
 
     /**
-     * @return Collection|Client[]
+     * @return Client[]
      */
-    public function getClients(): Collection
+    public function getClients(): Client
     {
         return $this->clients;
     }
@@ -126,9 +116,9 @@ class JobCategory
     }
 
     /**
-     * @return Collection|JobOffer[]
+     * @return JobOffer[]
      */
-    public function getJobOffers(): Collection
+    public function getJobOffers(): JobOffer
     {
         return $this->jobOffers;
     }
