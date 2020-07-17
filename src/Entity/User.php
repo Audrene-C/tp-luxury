@@ -32,7 +32,7 @@ class User implements UserInterface
     /**
      * @var string|null
      *
-     * @ORM\Column(name="roles", type="text", length=0, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="roles", type="json", length=0, nullable=false)
      */
     private $roles = [];
 

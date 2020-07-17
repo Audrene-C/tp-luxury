@@ -67,6 +67,7 @@ class CandidateController extends AbstractController
     public function edit(Request $request, Candidate $candidate): Response
     {
         $form = $this->createForm(Candidate1Type::class, $candidate);
+        // $candidate->setDateOfBirth()
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

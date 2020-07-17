@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200717121200 extends AbstractMigration
+final class Version20200717131223 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -38,6 +38,6 @@ final class Version20200717121200 extends AbstractMigration
         $this->addSql('ALTER TABLE client CHANGE job_category_id job_category_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE file CHANGE candidate_id candidate_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE job_offer CHANGE job_category_id job_category_id INT DEFAULT NULL, CHANGE client_id_id client_id_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE user CHANGE id_candidate_id id_candidate_id INT DEFAULT NULL, CHANGE roles roles LONGTEXT CHARACTER SET utf8mb4 DEFAULT NULL COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('ALTER TABLE user CHANGE id_candidate_id id_candidate_id INT DEFAULT NULL, CHANGE roles roles LONGTEXT CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_bin`');
     }
 }

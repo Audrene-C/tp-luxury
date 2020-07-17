@@ -22,16 +22,16 @@ class Candidate1Type extends AbstractType
             ->add('cv')
             ->add('profilPicture')
             ->add('currentLocation')
-            ->add('dateOfBirth')
-            ->add('placeOfBirth')
+            // ->add('dateOfBirth')
+            // ->add('placeOfBirth')
             ->add('email')
             ->add('availability')
             ->add('experience')
             ->add('description')
             ->add('notes')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('deletedAt')
+            // ->add('createdAt')
+            // ->add('updatedAt')
+            // ->add('deletedAt')
         ;
     }
 
