@@ -91,6 +91,7 @@ class JobOffer
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="job_category_id", referencedColumnName="id")
      * })
+     * @ORM\Column(nullable=true)
      */
     private $jobCategory;
 
