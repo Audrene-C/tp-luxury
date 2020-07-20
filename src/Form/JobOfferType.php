@@ -23,17 +23,7 @@ class JobOfferType extends AbstractType
             ->add('salary')
             ->add('createdAt')
             ->add('clientId')
-            ->add('jobCategory', EntityType::class, [
-                // looks for choices from this entity
-                'class' => JobCategory::class,
-            
-                // uses the User.username property as the visible option string
-                'choice_label' => 'category',
-            
-                // used to render a select box, check boxes or radios
-                // 'multiple' => true,
-                // 'expanded' => true,
-            ])
+            ->add('jobCategory')
         ;
     }
 

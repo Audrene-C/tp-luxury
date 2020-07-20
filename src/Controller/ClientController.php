@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ClientController extends AbstractController
 {
     /**
-     * @Route("", name="client_index", methods={"GET"})
+     * @Route("/", name="client_index", methods={"GET"})
      */
     public function index(ClientRepository $clientRepository): Response
     {
