@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
+
+
 {% block title %}Client index{% endblock %}
+
+{% block stylesheets %} 
+    <link href="{{ asset('assets/css/client.css') }}" rel="stylesheet">
+{% endblock %}
 
 {% block body %}
     <h1>Client index</h1>
@@ -29,8 +35,8 @@
                 <td>{{ client.contactEmail }}</td>
                 <td>{{ client.notes }}</td>
                 <td>
-                    <a href="{{ path('client_show', {'id': client.id}) }}">show</a>
-                    <a href="{{ path('client_edit', {'id': client.id}) }}">edit</a>
+                    <a href="{{ path('client_show', {'id': client.id}) }}" class="btn btn gradient secondary waves-effect waves-light btn-client">show</a>
+                    <a href="{{ path('client_edit', {'id': client.id}) }}" class="btn btn gradient secondary waves-effect waves-light btn-client">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -41,5 +47,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('client_new') }}">Create new</a>
+    <a href="{{ path('client_new') }}" class="btn btn-md primary waves-effect waves-light">Create new</a>
 {% endblock %}
