@@ -68,8 +68,9 @@ class Client
      *
      * @ORM\ManyToOne(targetEntity="JobCategory")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="job_category_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="job_category", referencedColumnName="id")
      * })
+     * @ORM\Column(nullable=true)
      */
     private $jobCategory;
     public function __construct()
