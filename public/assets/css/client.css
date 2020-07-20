@@ -1,4 +1,9 @@
 .btn-client{
    height: 50px;
+   width: 90px;
+   text-align: center;
 }
 
+h1{
+    margin-top: 170px;
+}
