@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\JobCategory;
 use App\Entity\JobOffer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,7 +23,17 @@ class JobOfferType extends AbstractType
             ->add('salary')
             ->add('createdAt')
             ->add('clientId')
-            ->add('jobCategory')
+            ->add('jobCategory', EntityType::class, [
+                // looks for choices from this entity
+                'class' => JobCategory::class,
+            
+                // uses the User.username property as the visible option string
+                'choice_label' => 'category',
+            
+                // used to render a select box, check boxes or radios
+                // 'multiple' => true,
+                // 'expanded' => true,
+            ])
         ;
     }
 
