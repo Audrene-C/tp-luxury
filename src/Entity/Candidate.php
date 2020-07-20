@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Candidate
  *
- * @ORM\Table(name="candidate", indexes={@ORM\Index(name="IDX_C8B28E44712A86AB", columns={"job_category_id"})})
+ * @ORM\Table(name="candidate", indexes={@ORM\Index(name="IDX_C8B28E44712A86AB", columns={"job_category"})})
  * @ORM\Entity
  */
 class Candidate
@@ -168,7 +168,7 @@ class Candidate
      *
      * @ORM\ManyToOne(targetEntity="JobCategory")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="job_category_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="job_category", referencedColumnName="id")
      * })
      */
     private $jobCategory;

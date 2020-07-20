@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Client
  *
- * @ORM\Table(name="client", indexes={@ORM\Index(name="IDX_C7440455712A86AB", columns={"job_category_id"})})
+ * @ORM\Table(name="client", indexes={@ORM\Index(name="IDX_C7440455712A86AB", columns={"job_category"})})
  * @ORM\Entity
  */
 class Client
@@ -73,6 +73,7 @@ class Client
      * @ORM\Column(nullable=true)
      */
     private $jobCategory;
+    
     public function __construct()
     {
         $this->jobOffers = new ArrayCollection();
