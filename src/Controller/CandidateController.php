@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CandidateController extends AbstractController
 {
     /**
-     * @Route("/", name="candidate_index", methods={"GET"})
+     * @Route("/", name="candidate", methods={"GET"})
      */
     public function index(): Response
     {
@@ -82,7 +82,6 @@ class CandidateController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
     /**
      * @Route("/{id}", name="candidate_delete", methods={"DELETE"})
      */
@@ -96,4 +95,5 @@ class CandidateController extends AbstractController
 
         return $this->redirectToRoute('candidate_index');
     }
+
 }

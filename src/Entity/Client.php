@@ -132,12 +132,12 @@ class Client
 
     public function getContactPhone(): ?string
     {
-        return $this->contact_phone;
+        return $this->contactPhone;
     }
 
-    public function setContactPhone(string $contact_phone): self
+    public function setContactPhone(string $contactPhone): self
     {
-        $this->contact_phone = $contact_phone;
+        $this->contactPhone = $contactPhone;
 
         return $this;
     }

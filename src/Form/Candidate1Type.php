@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Candidate;
-// use Doctrine\DBAL\Types\DateType;
+use App\Entity\JobCategory;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,10 +29,9 @@ class Candidate1Type extends AbstractType
             ->add('adress')
             ->add('country')
             ->add('nationality')
-            ->add('passport', FileType::class , [
-                'mapped' => false
-                ]
-            )
+            ->add('passport', CheckboxType::class, [
+                'label' => 'Do you have a passport ?',
+            ])
             ->add('cv', FileType::class , [
                 'mapped' => false
                 ]
@@ -42,17 +43,42 @@ class Candidate1Type extends AbstractType
             ->add('currentLocation')
             ->add('dateOfBirth', DateType::class, [
                 'widget' => 'single_text',
-                // 'input' =>  'datetime_immutable'
             ])
             ->add('placeOfBirth')
             ->add('email')
             ->add('availability')
-            ->add('experience')
+            ->add('experience', ChoiceType::class, [
+                'choices' => [
+                    '0 - 6 month' => '0 - 6 month',
+                    '6 month - 1 year' => '6 month - 1 year',
+                    '1 - 2 years' => '1 - 2 years',
+                    '2+ years' => '2+ years',
+                    '5+ years' => '5+ years',
+                    '10+ years' => '10+ years',
+                    ]
+                ]
+            )
             ->add('description')
             ->add('notes')
             // ->add('createdAt')
             // ->add('updatedAt')
             // ->add('deletedAt')
+            ->add('passportFile', FileType::class , [
+                'mapped' => false
+                ]
+            )
+            ->add('jobCategory', EntityType::class, [
+                // looks for choices from this entity
+                'class' => JobCategory::class,
+                'placeholder' => 'Choose a category',
+
+                // uses the User.username property as the visible option string
+                'choice_label' => 'category',
+
+                // used to render a select box, check boxes or radios
+                // 'multiple' => true,
+                // 'expanded' => true,
+            ])
         ;
     }
 
