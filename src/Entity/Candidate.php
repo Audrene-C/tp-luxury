@@ -2,138 +2,176 @@
 
 namespace App\Entity;
 
-use App\Repository\CandidateRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
- * @ORM\Entity(repositoryClass=CandidateRepository::class)
+ * Candidate
+ *
+ * @ORM\Table(name="candidate", indexes={@ORM\Index(name="IDX_C8B28E44712A86AB", columns={"job_category_id"})})
+ * @ORM\Entity
  */
 class Candidate
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @var bool|null
+     *
+     * @ORM\Column(name="gender", type="boolean", nullable=true, options={"default"="NULL"})
      */
     private $gender;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="first_name", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $firstName;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="last_name", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="adress", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $adress;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="country", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $country;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="nationality", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $nationality;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @var bool|null
+     *
+     * @ORM\Column(name="passport", type="boolean", nullable=true, options={"default"="NULL"})
      */
     private $passport;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="cv", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $cv;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="profil_picture", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $profilPicture;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="current_location", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $currentLocation;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="date_of_birth", type="date", nullable=true, options={"default"="NULL"})
      */
     private $dateOfBirth;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="place_of_birth", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $placeOfBirth;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $email;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @var bool|null
+     *
+     * @ORM\Column(name="availability", type="boolean", nullable=true, options={"default"="NULL"})
      */
     private $availability;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="experience", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $experience;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="notes", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $notes;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=true, options={"default"="NULL"})
      */
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true, options={"default"="NULL"})
      */
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="deleted_at", type="datetime", nullable=true, options={"default"="NULL"})
      */
     private $deletedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=JobCategory::class, inversedBy="candidates")
-     * @ORM\JoinColumn(nullable=false)
+     * @var \JobCategory
+     *
+     * @ORM\ManyToOne(targetEntity="JobCategory")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="job_category_id", referencedColumnName="id")
+     * })
      */
     private $jobCategory;
-
-    /**
-     * @ORM\OneToMany(targetEntity=File::class, mappedBy="candidate")
-     */
-    private $files;
-
-    /**
-     * @ORM\OneToOne(targetEntity=User::class, mappedBy="idCandidate", cascade={"persist", "remove"})
-     */
-    private $user;
 
     public function __construct()
     {
@@ -398,9 +436,9 @@ class Candidate
     }
 
     /**
-     * @return Collection|File[]
+     * @return File[]
      */
-    public function getFiles(): Collection
+    public function getFiles(): File
     {
         return $this->files;
     }
@@ -423,23 +461,6 @@ class Candidate
             if ($file->getCandidate() === $this) {
                 $file->setCandidate(null);
             }
-        }
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(User $user): self
-    {
-        $this->user = $user;
-
-        // set the owning side of the relation if necessary
-        if ($user->getIdCandidate() !== $this) {
-            $user->setIdCandidate($this);
         }
 
         return $this;

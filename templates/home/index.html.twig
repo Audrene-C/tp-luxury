@@ -238,7 +238,8 @@
                     </div>
                 </div>
             </section>
-
+            {% if is_granted('ROLE_USER') %}
+            {% else %}
             <section class="cta-candidate bg-fixed bg-cover overlay dark-5 padding-top-70 padding-bottom-50">
                 <div class="container">
                     <div class="row">
@@ -264,6 +265,7 @@
                     </div>
                 </div>
             </section>
+            {% endif %}
             <section id="job-offers" class="section-padding gray-bg">
                 <div class="container">
                     <div class="text-center mb-40">
@@ -402,7 +404,7 @@
                         </div>
 
                         <div class="text-center">
-                            <a href="/templates/jobs/index.html" class="btn gradient secondary waves-effect waves-light mt-30">View all job offers</a>
+                            <a href="{{path('jobs_offers')}}" class="btn gradient secondary waves-effect waves-light mt-30">View all job offers</a>
                         </div>
                     </div>
                 </div>

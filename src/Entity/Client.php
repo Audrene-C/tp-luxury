@@ -2,64 +2,76 @@
 
 namespace App\Entity;
 
-use App\Repository\ClientRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
- * @ORM\Entity(repositoryClass=ClientRepository::class)
+ * Client
+ *
+ * @ORM\Table(name="client", indexes={@ORM\Index(name="IDX_C7440455712A86AB", columns={"job_category_id"})})
+ * @ORM\Entity
  */
 class Client
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="society_name", type="string", length=255, nullable=false)
      */
     private $societyName;
 
     /**
-     * @ORM\ManyToOne(targetEntity=JobCategory::class, inversedBy="clients")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $jobCategory;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="contact_name", type="string", length=255, nullable=false)
      */
     private $contactName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="contact_position", type="string", length=255, nullable=false)
      */
     private $contactPosition;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="contact_phone", type="string", length=255, nullable=false)
      */
     private $contactPhone;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="contact_email", type="string", length=255, nullable=false)
      */
     private $contactEmail;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="notes", type="string", length=255, nullable=false)
      */
     private $notes;
 
     /**
-     * @ORM\OneToMany(targetEntity=JobOffer::class, mappedBy="clientId")
+     * @var \JobCategory
+     *
+     * @ORM\ManyToOne(targetEntity="JobCategory")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="job_category_id", referencedColumnName="id")
+     * })
      */
-    private $jobOffers;
-
+    private $jobCategory;
     public function __construct()
     {
         $this->jobOffers = new ArrayCollection();
@@ -184,4 +196,5 @@ class Client
 
         return $this;
     }
+
 }
