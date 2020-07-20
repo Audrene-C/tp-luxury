@@ -4,7 +4,7 @@ body .brand {
     background: url('../img/luxury-services-logo.png') no-repeat center center;
 }
 body .cta-candidate {
-    background-image: url('../img/bg2.jpg')
+    background-image: url('../img/bg2.jpg') no-repeat;
 }
 body hr{
     border-top: 1px solid rgba(255, 255, 255, 0.25);
