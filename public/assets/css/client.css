@@ -1,3 +1,11 @@
+body{
+    text-align: center;
+}
+
+h1,th, td{
+    text-align: center;
+}
+
 .btn-client{
    height: 50px;
    width: 90px;
@@ -5,5 +13,17 @@
 }
 
 h1{
+    color: #2F3138;
     margin-top: 170px;
+    margin-bottom: 50px;
+}
+
+.margin-client{
+    margin-top: 50px;
+}
+
+.delete-client{
+position: relative;
+    top: -50px;
+    left: 180px;
 }

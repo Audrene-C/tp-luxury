@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Client index</h1>
+    <h1 class="text-bold text-uppercase">Clients list</h1>
 
     <table class="table">
         <thead>
@@ -35,8 +35,8 @@
                 <td>{{ client.contactEmail }}</td>
                 <td>{{ client.notes }}</td>
                 <td>
-                    <a href="{{ path('client_show', {'id': client.id}) }}" class="btn btn gradient secondary waves-effect waves-light btn-client">show</a>
-                    <a href="{{ path('client_edit', {'id': client.id}) }}" class="btn btn gradient secondary waves-effect waves-light btn-client">edit</a>
+                    <a href="{{ path('client_show', {'id': client.id}) }}" class="btn btn-md gradient secondary waves-effect waves-light btn-client">show</a>
+                    <a href="{{ path('client_edit', {'id': client.id}) }}" class="btn btn-md gradient secondary waves-effect waves-light btn-client">edit</a>
                 </td>
             </tr>
         {% else %}
