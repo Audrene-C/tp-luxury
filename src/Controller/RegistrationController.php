@@ -22,7 +22,10 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
     {
         if($this->getUser()) {
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('home', [
+            'user' => $this->getUser(),
+
+            ]);
         }
         
         $user = new User();
@@ -60,6 +63,7 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/register.html.twig', [
+            'user' => $this->getUser(),
             'registrationForm' => $form->createView(),
         ]);
     }

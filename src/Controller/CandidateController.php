@@ -24,6 +24,7 @@ class CandidateController extends AbstractController
             ->findAll();
 
         return $this->render('candidate/index.html.twig', [
+            'user' => $this->getUser(),
             'candidates' => $candidates,
         ]);
     }
@@ -47,6 +48,7 @@ class CandidateController extends AbstractController
 
         return $this->render('candidate/new.html.twig', [
             'candidate' => $candidate,
+            'user' => $this->getUser(),
             'form' => $form->createView(),
         ]);
     }
@@ -57,6 +59,7 @@ class CandidateController extends AbstractController
     public function show(Candidate $candidate): Response
     {
         return $this->render('candidate/show.html.twig', [
+            'user' => $this->getUser(),
             'candidate' => $candidate,
         ]);
     }
@@ -98,7 +101,9 @@ class CandidateController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('candidate_index');
+        return $this->redirectToRoute('candidate_index', [
+            'user' => $this->getUser(),
+        ]);
     }
 
 }

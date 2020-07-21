@@ -21,6 +21,7 @@ class JobOfferController extends AbstractController
     public function index(JobOfferRepository $jobOfferRepository): Response
     {
         return $this->render('job_offer/index.html.twig', [
+            'user' => $this->getUser(),
             'job_offers' => $jobOfferRepository->findAll(),
         ]);
     }
@@ -44,6 +45,7 @@ class JobOfferController extends AbstractController
 
         return $this->render('job_offer/new.html.twig', [
             'job_offer' => $jobOffer,
+            'user' => $this->getUser(),
             'form' => $form->createView(),
         ]);
     }
@@ -55,6 +57,7 @@ class JobOfferController extends AbstractController
     {
         return $this->render('job_offer/show.html.twig', [
             'job_offer' => $jobOffer,
+            'user' => $this->getUser(),
         ]);
     }
 
@@ -74,6 +77,7 @@ class JobOfferController extends AbstractController
 
         return $this->render('job_offer/edit.html.twig', [
             'job_offer' => $jobOffer,
+            'user' => $this->getUser(),
             'form' => $form->createView(),
         ]);
     }
@@ -89,6 +93,9 @@ class JobOfferController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('job_offer_index');
+        return $this->redirectToRoute('job_offer_index', [
+            'user' => $this->getUser(),
+
+        ]);
     }
 }
