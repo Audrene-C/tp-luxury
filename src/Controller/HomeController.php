@@ -2,25 +2,24 @@
 
 namespace App\Controller;
 
+use App\Entity\JobOffer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\JobOfferRepository;
 
 class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="home")
      */
-    public function index()
+    public function index(JobOfferRepository $jobOfferRepository)
     {
-        return $this->render('home/index.html.twig');
+
+        $JobOffers = $jobOfferRepository->getLastJobOffers();
+
+        return $this->render('home/index.html.twig', [
+            "jobOffers" => $JobOffers
+        ]);
     }
 
-    /**
-     * @Route("/admin", name="admin")
-     */
-    public function admin()
-    {
-        //dd($this->getUser());
-        return $this->render('home/admin.html.twig');
-    }
 }

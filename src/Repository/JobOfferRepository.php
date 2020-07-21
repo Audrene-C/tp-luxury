@@ -19,22 +19,20 @@ class JobOfferRepository extends ServiceEntityRepository
         parent::__construct($registry, JobOffer::class);
     }
 
-    // /**
-    //  * @return JobOffer[] Returns an array of JobOffer objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return JobOffer[] Returns an array of JobOffer objects
+     */
+    
+    public function getLastJobOffers()
     {
-        return $this->createQueryBuilder('j')
-            ->andWhere('j.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('j.id', 'ASC')
+        return $this->createQueryBuilder('job_offer')
+            ->orderBy('job_offer.id', 'DESC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?JobOffer
