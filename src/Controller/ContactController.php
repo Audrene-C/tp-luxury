@@ -12,8 +12,14 @@ class ContactController extends AbstractController
      */
     public function index()
     {
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
         return $this->render('contact/index.html.twig', [
-            'user' => $this->getUser(),
+            'userCandidatId' => $userCandidatId,
 
         ]);
     }

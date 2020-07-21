@@ -12,8 +12,15 @@ class HomeController extends AbstractController
      */
     public function index()
     {
+
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
         return $this->render('home/index.html.twig', [
-        'user' => $this->getUser()
+            'userCandidatId' => $userCandidatId,
         ]);
     }
 
@@ -22,9 +29,14 @@ class HomeController extends AbstractController
      */
     public function admin()
     {
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
         //dd($this->getUser());
         return $this->render('home/admin.html.twig', [
-            'user' => $this->getUser(),
+            'userCandidatId' => $userCandidatId,
 
         ]);
     }

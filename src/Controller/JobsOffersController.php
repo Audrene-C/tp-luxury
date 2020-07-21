@@ -12,8 +12,14 @@ class JobsOffersController extends AbstractController
      */
     public function index()
     {
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
         return $this->render('jobs_offers/index.html.twig', [
-            'user' => $this->getUser(),
+            'userCandidatId' => $userCandidatId,
 
         ]);
     }

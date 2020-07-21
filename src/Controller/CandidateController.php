@@ -23,8 +23,14 @@ class CandidateController extends AbstractController
             ->getRepository(Candidate::class)
             ->findAll();
 
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
         return $this->render('candidate/index.html.twig', [
-            'user' => $this->getUser(),
+            'userCandidatId' => $userCandidatId,
             'candidates' => $candidates,
         ]);
     }
@@ -46,9 +52,15 @@ class CandidateController extends AbstractController
             return $this->redirectToRoute('candidate_index');
         }
 
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
         return $this->render('candidate/new.html.twig', [
             'candidate' => $candidate,
-            'user' => $this->getUser(),
+            'userCandidatId' => $userCandidatId,
             'form' => $form->createView(),
         ]);
     }
@@ -58,8 +70,14 @@ class CandidateController extends AbstractController
      */
     public function show(Candidate $candidate): Response
     {
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
         return $this->render('candidate/show.html.twig', [
-            'user' => $this->getUser(),
+            'userCandidatId' => $userCandidatId,
             'candidate' => $candidate,
         ]);
     }
@@ -81,11 +99,16 @@ class CandidateController extends AbstractController
 
             return $this->redirectToRoute('home');
         }
-
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+        
         return $this->render('candidate/edit.html.twig', [
             'candidate' => $candidate,
             'form' => $form->createView(),
-            'user' => $this->getUser(),
+            'userCandidatId' => $userCandidatId,
         ]);
     }
     /**
@@ -101,8 +124,14 @@ class CandidateController extends AbstractController
             $entityManager->flush();
         }
 
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
         return $this->redirectToRoute('candidate_index', [
-            'user' => $this->getUser(),
+            'userCandidatId' => $userCandidatId,
         ]);
     }
 

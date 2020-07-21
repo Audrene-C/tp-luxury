@@ -12,8 +12,13 @@ class AboutUsController extends AbstractController
      */
     public function index()
     {
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
         return $this->render('about_us/index.html.twig',[
-            'user' => $this->getUser()
+            'userCandidatId' => $userCandidatId,
             ]);
     }
 }
