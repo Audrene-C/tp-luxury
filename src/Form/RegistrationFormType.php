@@ -27,7 +27,7 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('isAdmin', HiddenType::class, [
-                'data' => 1,
+                'data' => 0,
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,

@@ -9,6 +9,12 @@ select {
     display: inline-block!important;
 }
 
+.labelpassport {
+    font-size: 14px!important;
+    font-weight: initial!important;
+    color: rgba(0, 0, 0, 0.582);
+}
+
 /*------------------------------------------------------------------
 Alert
 -------------------------------------------------------------------*/

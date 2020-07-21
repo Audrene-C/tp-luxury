@@ -12,6 +12,9 @@ class JobsOffersController extends AbstractController
      */
     public function index()
     {
-        return $this->render('jobs_offers/index.html.twig');
+        return $this->render('jobs_offers/index.html.twig', [
+            'user' => $this->getUser(),
+
+        ]);
     }
 }

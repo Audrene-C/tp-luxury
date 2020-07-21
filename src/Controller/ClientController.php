@@ -22,6 +22,7 @@ class ClientController extends AbstractController
     {
         return $this->render('client/index.html.twig', [
             'clients' => $clientRepository->findAll(),
+            'user' => $this->getUser(),
         ]);
     }
 
@@ -44,6 +45,7 @@ class ClientController extends AbstractController
 
         return $this->render('client/new.html.twig', [
             'client' => $client,
+            'user' => $this->getUser(),
             'form' => $form->createView(),
         ]);
     }
@@ -54,6 +56,7 @@ class ClientController extends AbstractController
     public function show(Client $client): Response
     {
         return $this->render('client/show.html.twig', [
+            'user' => $this->getUser(),
             'client' => $client,
         ]);
     }
@@ -74,6 +77,7 @@ class ClientController extends AbstractController
 
         return $this->render('client/edit.html.twig', [
             'client' => $client,
+            'user' => $this->getUser(),
             'form' => $form->createView(),
         ]);
     }
@@ -89,6 +93,9 @@ class ClientController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('client_index');
+        return $this->redirectToRoute('client_index', [
+            'user' => $this->getUser(),
+
+        ]);
     }
 }
