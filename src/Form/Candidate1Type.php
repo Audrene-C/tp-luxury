@@ -10,6 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -31,13 +32,16 @@ class Candidate1Type extends AbstractType
             ->add('nationality')
             ->add('passport', CheckboxType::class, [
                 'label' => 'Do you have a passport ?',
+                'required' => false
             ])
             ->add('cv', FileType::class , [
-                'mapped' => false
+                'mapped' => false,
+                'required' => false,
                 ]
             )
             ->add('profilPicture', FileType::class , [
-                'mapped' => false
+                'mapped' => false,
+                'required' => false
                 ]
             )
             ->add('currentLocation')
@@ -45,8 +49,10 @@ class Candidate1Type extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('placeOfBirth')
-            ->add('email')
-            ->add('availability')
+            ->add('availability', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Are you available ?',
+            ])
             ->add('experience', ChoiceType::class, [
                 'choices' => [
                     '0 - 6 month' => '0 - 6 month',
@@ -58,13 +64,16 @@ class Candidate1Type extends AbstractType
                     ]
                 ]
             )
-            ->add('description')
-            ->add('notes')
-            // ->add('createdAt')
-            // ->add('updatedAt')
-            // ->add('deletedAt')
+            ->add('description', TextareaType::class, [
+                'attr' => ['class' => 'materialize-textarea',
+                            'cols' => '50',
+                            'rows' => '10'],
+                'required' => false
+                ]
+            )
             ->add('passportFile', FileType::class , [
-                'mapped' => false
+                'mapped' => false,
+                'required' => false,
                 ]
             )
             ->add('jobCategory', EntityType::class, [

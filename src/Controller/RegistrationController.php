@@ -6,6 +6,7 @@ use App\Entity\Candidate;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\LoginFormAuthenticator;
+use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,6 +40,10 @@ class RegistrationController extends AbstractController
             );
             $candidat = new Candidate();
             $user->setIdCandidate($candidat);
+            $createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+            $candidat->setCreatedAt($createdAt);
+            $email = $user->getEmail();
+            $candidat->setEmail($email);
             // dd($user);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($candidat);
