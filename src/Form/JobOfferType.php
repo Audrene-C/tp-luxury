@@ -32,13 +32,13 @@ class JobOfferType extends AbstractType
             ->add('createdAt', DateType::class, [
                 'widget' => 'single_text',
             ])
-            ->add('clientId', EntityType::class, [
+            ->add('client', EntityType::class, [
                 // looks for choices from this entity
                 'class' => Client::class,
-                'placeholder' => 'Choose a client ID',
+                'placeholder' => 'Choose a client',
             
                 // uses the User.username property as the visible option string
-                'choice_label' => 'id',
+                'choice_label' => 'contact_name',
             
                 // used to render a select box, check boxes or radios
                 // 'multiple' => true,

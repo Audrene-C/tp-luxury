@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class JobOfferController extends AbstractController
 {
     /**
-     * @Route("/", name="job_offer_index", methods={"GET"})
+     * @Route("/", name="job_offer", methods={"GET"})
      */
     public function index(JobOfferRepository $jobOfferRepository): Response
     {
@@ -39,7 +39,7 @@ class JobOfferController extends AbstractController
             $entityManager->persist($jobOffer);
             $entityManager->flush();
 
-            return $this->redirectToRoute('job_offer_index');
+            return $this->redirectToRoute('job_offer');
         }
 
         return $this->render('job_offer/new.html.twig', [
@@ -69,7 +69,7 @@ class JobOfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('job_offer_index');
+            return $this->redirectToRoute('job_offer');
         }
 
         return $this->render('job_offer/edit.html.twig', [
@@ -89,6 +89,6 @@ class JobOfferController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('job_offer_index');
+        return $this->redirectToRoute('job_offer');
     }
 }
