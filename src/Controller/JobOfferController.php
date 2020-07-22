@@ -16,11 +16,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class JobOfferController extends AbstractController
 {
     /**
-     * @Route("/", name="job_offer_index", methods={"GET"})
+     * @Route("/", name="job_offer", methods={"GET"})
      */
     public function index(JobOfferRepository $jobOfferRepository): Response
     {
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
         return $this->render('job_offer/index.html.twig', [
+            'userCandidatId' => $userCandidatId,
             'job_offers' => $jobOfferRepository->findAll(),
         ]);
     }
@@ -39,11 +46,18 @@ class JobOfferController extends AbstractController
             $entityManager->persist($jobOffer);
             $entityManager->flush();
 
-            return $this->redirectToRoute('job_offer_index');
+            return $this->redirectToRoute('job_offer');
+        }
+
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
         }
 
         return $this->render('job_offer/new.html.twig', [
             'job_offer' => $jobOffer,
+            'userCandidatId' => $userCandidatId,
             'form' => $form->createView(),
         ]);
     }
@@ -53,8 +67,15 @@ class JobOfferController extends AbstractController
      */
     public function show(JobOffer $jobOffer): Response
     {
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
         return $this->render('job_offer/show.html.twig', [
             'job_offer' => $jobOffer,
+            'userCandidatId' => $userCandidatId,
         ]);
     }
 
@@ -69,17 +90,24 @@ class JobOfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('job_offer_index');
+            return $this->redirectToRoute('job_offer');
+        }
+
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
         }
 
         return $this->render('job_offer/edit.html.twig', [
             'job_offer' => $jobOffer,
+            'userCandidatId' => $userCandidatId,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="job_offer_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="job_offer_delete", methods={"DELETE"})
      */
     public function delete(Request $request, JobOffer $jobOffer): Response
     {
@@ -89,6 +117,15 @@ class JobOfferController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('job_offer_index');
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
+        return $this->redirectToRoute('job_offer', [
+            'userCandidatId' => $userCandidatId,
+
+        ]);
     }
 }

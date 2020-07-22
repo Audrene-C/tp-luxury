@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
+// use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * JobCategory
@@ -13,6 +13,11 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class JobCategory
 {
+
+    public function __toString()
+    {
+        return $this->category;
+    }
     /**
      * @var int
      *
@@ -29,12 +34,22 @@ class JobCategory
      */
     private $category;
 
-    public function __construct()
-    {
-        $this->candidates = new ArrayCollection();
-        $this->clients = new ArrayCollection();
-        $this->jobOffers = new ArrayCollection();
-    }
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $dataGroup;
+
+    // public function __toString()
+    // {
+    //     return $this->category;
+    // }
+
+    // public function __construct()
+    // {
+    //     $this->candidates = new ArrayCollection();
+    //     $this->clients = new ArrayCollection();
+    //     $this->jobOffers = new ArrayCollection();
+    // }
 
     public function getId(): ?int
     {
@@ -53,95 +68,107 @@ class JobCategory
         return $this;
     }
 
-    /**
-     * @return Candidate[]
-     */
-    public function getCandidates(): Candidate
+    // /**
+    //  * @return Candidate[]
+    //  */
+    // public function getCandidates(): Candidate
+    // {
+    //     return $this->candidates;
+    // }
+
+    // public function addCandidate(Candidate $candidate): self
+    // {
+    //     if (!$this->candidates->contains($candidate)) {
+    //         $this->candidates[] = $candidate;
+    //         $candidate->setJobCategory($this);
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removeCandidate(Candidate $candidate): self
+    // {
+    //     if ($this->candidates->contains($candidate)) {
+    //         $this->candidates->removeElement($candidate);
+    //         // set the owning side to null (unless already changed)
+    //         if ($candidate->getJobCategory() === $this) {
+    //             $candidate->setJobCategory(null);
+    //         }
+    //     }
+
+    //     return $this;
+    // }
+
+    // /**
+    //  * @return Client[]
+    //  */
+    // public function getClients(): Client
+    // {
+    //     return $this->clients;
+    // }
+
+    // public function addClient(Client $client): self
+    // {
+    //     if (!$this->clients->contains($client)) {
+    //         $this->clients[] = $client;
+    //         $client->setJobCategory($this);
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removeClient(Client $client): self
+    // {
+    //     if ($this->clients->contains($client)) {
+    //         $this->clients->removeElement($client);
+    //         // set the owning side to null (unless already changed)
+    //         if ($client->getJobCategory() === $this) {
+    //             $client->setJobCategory(null);
+    //         }
+    //     }
+
+    //     return $this;
+    // }
+
+    // /**
+    //  * @return JobOffer[]
+    //  */
+    // public function getJobOffers(): JobOffer
+    // {
+    //     return $this->jobOffers;
+    // }
+
+    // public function addJobOffer(JobOffer $jobOffer): self
+    // {
+    //     if (!$this->jobOffers->contains($jobOffer)) {
+    //         $this->jobOffers[] = $jobOffer;
+    //         $jobOffer->setJobCategory($this);
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removeJobOffer(JobOffer $jobOffer): self
+    // {
+    //     if ($this->jobOffers->contains($jobOffer)) {
+    //         $this->jobOffers->removeElement($jobOffer);
+    //         // set the owning side to null (unless already changed)
+    //         if ($jobOffer->getJobCategory() === $this) {
+    //             $jobOffer->setJobCategory(null);
+    //         }
+    //     }
+
+    //     return $this;
+    // }
+
+    public function getDataGroup(): ?string
     {
-        return $this->candidates;
+        return $this->dataGroup;
     }
 
-    public function addCandidate(Candidate $candidate): self
+    public function setDataGroup(?string $dataGroup): self
     {
-        if (!$this->candidates->contains($candidate)) {
-            $this->candidates[] = $candidate;
-            $candidate->setJobCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCandidate(Candidate $candidate): self
-    {
-        if ($this->candidates->contains($candidate)) {
-            $this->candidates->removeElement($candidate);
-            // set the owning side to null (unless already changed)
-            if ($candidate->getJobCategory() === $this) {
-                $candidate->setJobCategory(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Client[]
-     */
-    public function getClients(): Client
-    {
-        return $this->clients;
-    }
-
-    public function addClient(Client $client): self
-    {
-        if (!$this->clients->contains($client)) {
-            $this->clients[] = $client;
-            $client->setJobCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeClient(Client $client): self
-    {
-        if ($this->clients->contains($client)) {
-            $this->clients->removeElement($client);
-            // set the owning side to null (unless already changed)
-            if ($client->getJobCategory() === $this) {
-                $client->setJobCategory(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return JobOffer[]
-     */
-    public function getJobOffers(): JobOffer
-    {
-        return $this->jobOffers;
-    }
-
-    public function addJobOffer(JobOffer $jobOffer): self
-    {
-        if (!$this->jobOffers->contains($jobOffer)) {
-            $this->jobOffers[] = $jobOffer;
-            $jobOffer->setJobCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeJobOffer(JobOffer $jobOffer): self
-    {
-        if ($this->jobOffers->contains($jobOffer)) {
-            $this->jobOffers->removeElement($jobOffer);
-            // set the owning side to null (unless already changed)
-            if ($jobOffer->getJobCategory() === $this) {
-                $jobOffer->setJobCategory(null);
-            }
-        }
+        $this->dataGroup = $dataGroup;
 
         return $this;
     }

@@ -36,7 +36,7 @@
 
 
 
-        <link href="/assets/css/main.css" rel="stylesheet">
+        <link href="{{ asset('/assets/css/main.css') }}" rel="stylesheet">
 
         <link href="http://kys.idmkr.io/cache/assets/frontend.kys.materialize.a1042cadda540464eafd9350bb40433a_1547807689.css" rel="stylesheet">
         <link href="http://kys.idmkr.io/cache/assets/frontend.kys.bootstrap.457005dcd8ab887d5f47791eaa1e3a26_1547807834.css" rel="stylesheet">
@@ -116,7 +116,7 @@
                                                 <li><a href="{{path('dashboard')}}">Dashboard</a></li>
                                                 <li><a href="{{path('app_logout')}}">Logout</a></li>
                                             {% elseif is_granted('ROLE_USER') %}
-                                                <li><a href="{{path('candidate')}}">Profile</a></li>
+                                                <li><a href="{{path('candidate_edit',{ 'id': userCandidatId.id})}}">Profile</a></li>
                                                 <li><a href="{{path('app_logout')}}">Logout</a></li>
                                             {% else %}
                                                 <li><a href="{{path('login')}}">Login</a></li>
@@ -130,7 +130,7 @@
                                 <ul class="menuzord-menu pull-right light" role="navigation">
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <li class=" dropdown">
-                                        <a target="_self" href="{{path('home')}}">
+                                        <a target="_self" href="{{path('dashboard')}}">
                                             <span>Dashboard</span>
                                         </a>
                                     </li>
@@ -141,7 +141,7 @@
                                     </li>
                                 {% elseif is_granted('ROLE_USER') %}
                                     <li class=" dropdown">
-                                        <a target="_self" href="{{path('candidate')}}">
+                                        <a target="_self" href="{{path('candidate_edit',{ 'id': userCandidatId.id})}}">
                                             <span>Profile</span>
                                         </a>
                                     </li>
@@ -194,6 +194,7 @@
                     </div>
                 </div>
             </header>
+
         {% endblock %}
 
         {% block body %}{% endblock %}

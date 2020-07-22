@@ -6,6 +6,7 @@ use App\Entity\Candidate;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\LoginFormAuthenticator;
+use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +22,10 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
     {
         if($this->getUser()) {
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('home', [
+                'userCandidatId' => $this->getUser()->getIdCandidate(),
+
+            ]);
         }
         
         $user = new User();
@@ -39,6 +43,10 @@ class RegistrationController extends AbstractController
             );
             $candidat = new Candidate();
             $user->setIdCandidate($candidat);
+            $createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+            $candidat->setCreatedAt($createdAt);
+            $email = $user->getEmail();
+            $candidat->setEmail($email);
             // dd($user);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($candidat);
@@ -55,6 +63,7 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/register.html.twig', [
+            'userCandidatId' => $this->getUser()->getIdCandidate(),
             'registrationForm' => $form->createView(),
         ]);
     }

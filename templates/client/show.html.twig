@@ -33,47 +33,46 @@
         <section class="section-padding gray-bg log-section">
             <div class="container">
                 <div class="row">
-                    
-                    
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <th>Id</th>
-                                <td>{{ client.id }}</td>
-                            </tr>
-                            <tr>
-                                <th>SocietyName</th>
-                                <td>{{ client.societyName }}</td>
-                            </tr>
-                            <tr>
-                                <th>ContactName</th>
-                                <td>{{ client.contactName }}</td>
-                            </tr>
-                            <tr>
-                                <th>ContactPosition</th>
-                                <td>{{ client.contactPosition }}</td>
-                            </tr>
-                            <tr>
-                                <th>ContactPhone</th>
-                                <td>{{ client.contactPhone }}</td>
-                            </tr>
-                            <tr>
-                                <th>ContactEmail</th>
-                                <td>{{ client.contactEmail }}</td>
-                            </tr>
-                            <tr>
-                                <th>Notes</th>
-                                <td>{{ client.notes }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
 
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ client.id }}</td>
+            </tr>
+            <tr>
+                <th>SocietyName</th>
+                <td>{{ client.societyName }}</td>
+            </tr>
+            <tr>
+                <th>ContactName</th>
+                <td>{{ client.contactName }}</td>
+            </tr>
+            <tr>
+                <th>ContactPosition</th>
+                <td>{{ client.contactPosition }}</td>
+            </tr>
+            <tr>
+                <th>ContactPhone</th>
+                <td>{{ client.contactPhone }}</td>
+            </tr>
+            <tr>
+                <th>ContactEmail</th>
+                <td>{{ client.contactEmail }}</td>
+            </tr>
+            <tr>
+                <th>Notes</th>
+                <td>{{ client.notes }}</td>
+            </tr>
+        </tbody>
+    </table>
 
-                    <a href="{{ path('client_index') }}" class="btn btn-md primary border waves-effect waves-dark margin-client">back to list</a>
+    <a href="{{ path('client') }}">back to list</a>
 
-                    <a href="{{ path('client_edit', {'id': client.id}) }}" class="btn btn-md primary waves-effect waves-light margin-client">edit</a>
+    <a href="{{ path('client_edit', {'id': client.id}) }}">edit</a>
 
-                    {{ include('client/_delete_form.html.twig') }}
+    {{ include('client/_delete_form.html.twig') }}
+
                     
 
                 </div>
@@ -84,6 +83,4 @@
 
 </div>
 
-
-    
 {% endblock %}

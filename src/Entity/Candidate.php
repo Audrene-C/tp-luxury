@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Candidate
  *
- * @ORM\Table(name="candidate", indexes={@ORM\Index(name="IDX_C8B28E44712A86AB", columns={"job_category_id"})})
+ * @ORM\Table(name="candidate", indexes={@ORM\Index(name="IDX_C8B28E44712A86AB", columns={"job_category"})})
  * @ORM\Entity
  */
 class Candidate
@@ -168,10 +168,20 @@ class Candidate
      *
      * @ORM\ManyToOne(targetEntity="JobCategory")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="job_category_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="job_category", referencedColumnName="id")
      * })
      */
     private $jobCategory;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $passportFile;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true, options={"default" : false})
+     */
+    private $isComplete;
 
     public function __construct()
     {
@@ -462,6 +472,30 @@ class Candidate
                 $file->setCandidate(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPassportFile(): ?string
+    {
+        return $this->passportFile;
+    }
+
+    public function setPassportFile(?string $passportFile): self
+    {
+        $this->passportFile = $passportFile;
+
+        return $this;
+    }
+
+    public function getIsComplete(): ?bool
+    {
+        return $this->isComplete;
+    }
+
+    public function setIsComplete(?bool $isComplete): self
+    {
+        $this->isComplete = $isComplete;
 
         return $this;
     }
