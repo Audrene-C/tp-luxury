@@ -178,6 +178,11 @@ class Candidate
      */
     private $passportFile;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true, options={"default" : false})
+     */
+    private $isComplete;
+
     public function __construct()
     {
         $this->files = new ArrayCollection();
@@ -479,6 +484,18 @@ class Candidate
     public function setPassportFile(?string $passportFile): self
     {
         $this->passportFile = $passportFile;
+
+        return $this;
+    }
+
+    public function getIsComplete(): ?bool
+    {
+        return $this->isComplete;
+    }
+
+    public function setIsComplete(?bool $isComplete): self
+    {
+        $this->isComplete = $isComplete;
 
         return $this;
     }
