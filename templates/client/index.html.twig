@@ -9,43 +9,82 @@
 {% endblock %}
 
 {% block body %}
-    <h1 class="text-bold text-uppercase">Clients list</h1>
+<div class="base">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>SocietyName</th>
-                <th>ContactName</th>
-                <th>ContactPosition</th>
-                <th>ContactPhone</th>
-                <th>ContactEmail</th>
-                <th>Notes</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for client in clients %}
-            <tr>
-                <td>{{ client.id }}</td>
-                <td>{{ client.societyName }}</td>
-                <td>{{ client.contactName }}</td>
-                <td>{{ client.contactPosition }}</td>
-                <td>{{ client.contactPhone }}</td>
-                <td>{{ client.contactEmail }}</td>
-                <td>{{ client.notes }}</td>
-                <td>
-                    <a href="{{ path('client_show', {'id': client.id}) }}" class="btn btn-md gradient secondary waves-effect waves-light btn-client">show</a>
-                    <a href="{{ path('client_edit', {'id': client.id}) }}" class="btn btn-md gradient secondary waves-effect waves-light btn-client">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <!-- Page -->
+    <div class="page">
 
-    <a href="{{ path('client_new') }}" class="btn btn-md primary waves-effect waves-light">Create new</a>
+        <!-- Page Header-->
+        <section class="page-title page-title-bg fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="white-text">Clients List</h2>
+                        <span class="white-text">Welcome on board</span>
+                        <ol class="breadcrumb">
+                            <li><a href="#!">Home</a></li>
+                            <li class="active">Clients</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Page Content-->
+        <section class="section-padding gray-bg log-section">
+            <div class="container">
+                <div class="row">
+                    
+                         <!--<h3 class="text-extrabold">Create a new account</h3>-->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>SocietyName</th>
+                                    <th>ContactName</th>
+                                    <th>ContactPosition</th>
+                                    <th>ContactPhone</th>
+                                    <th>ContactEmail</th>
+                                    <th>Notes</th>
+                                    <th>actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for client in clients %}
+                                 <tr>
+                                    <td>{{ client.id }}</td>
+                                    <td>{{ client.societyName }}</td>
+                                    <td>{{ client.contactName }}</td>
+                                    <td>{{ client.contactPosition }}</td>
+                                    <td>{{ client.contactPhone }}</td>
+                                    <td>{{ client.contactEmail }}</td>
+                                    <td>{{ client.notes }}</td>
+                                    <td>
+                                        <a href="{{ path('client_show', {'id': client.id}) }}" class="btn btn-md gradient secondary waves-effect waves-light btn-client">show</a>
+                                        <a href="{{ path('client_edit', {'id': client.id}) }}" class="btn btn-md gradient secondary waves-effect waves-light btn-client">edit</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="8">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                        <a href="{{ path('client_new') }}" class="btn btn-md primary waves-effect waves-light">Create new</a>
+                    
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</div>
+
+
+
+    
 {% endblock %}

@@ -1,10 +1,4 @@
-body{
-    text-align: center;
-}
 
-h1,th, td{
-    text-align: center;
-}
 
 .btn-client{
    height: 50px;
@@ -12,10 +6,8 @@ h1,th, td{
    text-align: center;
 }
 
-h1{
-    color: #2F3138;
-    margin-top: 170px;
-    margin-bottom: 50px;
+.card-clent{
+    width: 100%;
 }
 
 .margin-client{
@@ -25,5 +17,5 @@ h1{
 .delete-client{
 position: relative;
     top: -50px;
-    left: 180px;
+    left: 245px;
 }
