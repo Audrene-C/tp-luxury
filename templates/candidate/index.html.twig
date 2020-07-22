@@ -33,8 +33,12 @@
             </tr>
         </thead>
         <tbody>
-        {% for candidate in candidates %}
+            {% for candidate in candidates %}
             <tr>
+                <td>
+                    <a href="{{ path('candidate_show', {'id': candidate.id}) }}">show</a>
+                    <a href="{{ path('candidate_edit', {'id': candidate.id}) }}">edit</a>
+                </td>
                 <td>{{ candidate.id }}</td>
                 <td>{{ candidate.gender ? 'Yes' : 'No' }}</td>
                 <td>{{ candidate.firstName }}</td>
@@ -56,10 +60,6 @@
                 <td>{{ candidate.createdAt ? candidate.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ candidate.updatedAt ? candidate.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ candidate.deletedAt ? candidate.deletedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('candidate_show', {'id': candidate.id}) }}">show</a>
-                    <a href="{{ path('candidate_edit', {'id': candidate.id}) }}">edit</a>
-                </td>
             </tr>
         {% else %}
             <tr>

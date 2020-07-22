@@ -20,8 +20,15 @@ class ClientController extends AbstractController
      */
     public function index(ClientRepository $clientRepository): Response
     {
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
         return $this->render('client/index.html.twig', [
             'clients' => $clientRepository->findAll(),
+            'userCandidatId' => $userCandidatId,
         ]);
     }
 
@@ -43,8 +50,15 @@ class ClientController extends AbstractController
             return $this->redirectToRoute('client');
         }
 
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
         return $this->render('client/new.html.twig', [
             'client' => $client,
+            'userCandidatId' => $userCandidatId,
             'form' => $form->createView(),
         ]);
     }
@@ -54,7 +68,14 @@ class ClientController extends AbstractController
      */
     public function show(Client $client): Response
     {
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
         return $this->render('client/show.html.twig', [
+            'userCandidatId' => $userCandidatId,
             'client' => $client,
         ]);
     }
@@ -72,9 +93,15 @@ class ClientController extends AbstractController
 
             return $this->redirectToRoute('client_index');
         }
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
 
         return $this->render('client/edit.html.twig', [
             'client' => $client,
+            'userCandidatId' => $userCandidatId,
             'form' => $form->createView(),
         ]);
     }
@@ -90,6 +117,14 @@ class ClientController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('client_index');
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
+        return $this->redirectToRoute('client_index', [
+            'userCandidatId' => $userCandidatId,
+        ]);
     }
 }

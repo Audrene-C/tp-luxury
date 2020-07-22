@@ -173,6 +173,11 @@ class Candidate
      */
     private $jobCategory;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $passportFile;
+
     public function __construct()
     {
         $this->files = new ArrayCollection();
@@ -462,6 +467,18 @@ class Candidate
                 $file->setCandidate(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPassportFile(): ?string
+    {
+        return $this->passportFile;
+    }
+
+    public function setPassportFile(?string $passportFile): self
+    {
+        $this->passportFile = $passportFile;
 
         return $this;
     }

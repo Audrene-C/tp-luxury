@@ -88,12 +88,11 @@ class User implements UserInterface
 
     public function getRoles(): array
     {
-        $roles = $this->roles;
         $roles[] = 'ROLE_USER';
         if($this->getIsAdmin()) {
             $roles[] = 'ROLE_ADMIN';
         }
-        return array_unique($roles);
+        return $roles;
 
     }
 
