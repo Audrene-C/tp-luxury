@@ -4,10 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use App\Entity\JobCategory;
 /**
  * Client
  *
- * @ORM\Table(name="client", indexes={@ORM\Index(name="IDX_C7440455712A86AB", columns={"job_category_id"})})
+ * @ORM\Table(name="client", indexes={@ORM\Index(name="IDX_C7440455712A86AB", columns={"job_category"})})
  * @ORM\Entity
  */
 class Client
@@ -63,16 +64,16 @@ class Client
      */
     private $notes;
 
-    /**
-     * @var \JobCategory
+   
+
+     /**
+     * @var JobCategory
      *
-     * @ORM\ManyToOne(targetEntity="JobCategory")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="job_category", referencedColumnName="id")
-     * })
-     * @ORM\Column(nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\JobCategory")
+     * @ORM\JoinColumn(name="job_category", referencedColumnName="id")
      */
     private $jobCategory;
+    
     public function __construct()
     {
         $this->jobOffers = new ArrayCollection();
@@ -163,37 +164,6 @@ class Client
     public function setNotes(string $notes): self
     {
         $this->notes = $notes;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|JobOffer[]
-     */
-    public function getJobOffers(): Collection
-    {
-        return $this->jobOffers;
-    }
-
-    public function addJobOffer(JobOffer $jobOffer): self
-    {
-        if (!$this->jobOffers->contains($jobOffer)) {
-            $this->jobOffers[] = $jobOffer;
-            $jobOffer->setClientId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeJobOffer(JobOffer $jobOffer): self
-    {
-        if ($this->jobOffers->contains($jobOffer)) {
-            $this->jobOffers->removeElement($jobOffer);
-            // set the owning side to null (unless already changed)
-            if ($jobOffer->getClientId() === $this) {
-                $jobOffer->setClientId(null);
-            }
-        }
 
         return $this;
     }

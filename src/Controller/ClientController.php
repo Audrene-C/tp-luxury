@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ClientController extends AbstractController
 {
     /**
-     * @Route("/", name="client_index", methods={"GET"})
+     * @Route("/", name="client", methods={"GET"})
      */
     public function index(ClientRepository $clientRepository): Response
     {
@@ -40,13 +40,14 @@ class ClientController extends AbstractController
         $client = new Client();
         $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager = $this->getDoctrine()->getManager();
+            // dd($client);
             $entityManager->persist($client);
             $entityManager->flush();
 
-            return $this->redirectToRoute('client_index');
+            return $this->redirectToRoute('client');
         }
 
         $userCandidatId = '';

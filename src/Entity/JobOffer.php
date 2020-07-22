@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\JobCategory;
+use App\Entity\Client;
 
 /**
  * JobOffer
  *
- * @ORM\Table(name="job_offer", indexes={@ORM\Index(name="IDX_288A3A4EDC2902E0", columns={"client_id_id"}), @ORM\Index(name="IDX_288A3A4E712A86AB", columns={"job_category_id"})})
+ * @ORM\Table(name="job_offer", indexes={@ORM\Index(name="IDX_288A3A4EDC2902E0", columns={"client"}), @ORM\Index(name="IDX_288A3A4E712A86AB", columns={"job_category"})})
  * @ORM\Entity
  */
 class JobOffer
@@ -15,7 +17,7 @@ class JobOffer
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=true)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -24,35 +26,35 @@ class JobOffer
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255, nullable=false)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="active", type="boolean", nullable=false)
+     * @ORM\Column(name="active", type="boolean", nullable=true)
      */
     private $active;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="notes", type="string", length=255, nullable=false)
+     * @ORM\Column(name="notes", type="string", length=255, nullable=true)
      */
     private $notes;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="job_title", type="string", length=255, nullable=false)
+     * @ORM\Column(name="job_title", type="string", length=255, nullable=true)
      */
     private $jobTitle;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="contract_type", type="string", length=255, nullable=false)
+     * @ORM\Column(name="contract_type", type="string", length=255, nullable=true)
      */
     private $contractType;
 
@@ -80,44 +82,39 @@ class JobOffer
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
     private $createdAt;
 
     /**
-     * @var \JobCategory
+     * @var JobCategory
      *
-     * @ORM\ManyToOne(targetEntity="JobCategory")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="job_category", referencedColumnName="id")
-     * })
-     * @ORM\Column(nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\JobCategory")
+     * @ORM\JoinColumn(name="job_category", referencedColumnName="id")
      */
     private $jobCategory;
 
     /**
-     * @var \Client
+     * @var Client
      *
-     * @ORM\ManyToOne(targetEntity="Client")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="client_id_id", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client")
+     * @ORM\JoinColumn(name="client", referencedColumnName="id")
      */
-    private $clientId;
+    private $client;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getClientId(): ?Client
+    public function getClient(): ?Client
     {
-        return $this->clientId;
+        return $this->client;
     }
 
-    public function setClientId(?Client $clientId): self
+    public function setClient(?Client $client): self
     {
-        $this->clientId = $clientId;
+        $this->client = $client;
 
         return $this;
     }

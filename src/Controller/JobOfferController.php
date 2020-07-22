@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class JobOfferController extends AbstractController
 {
     /**
-     * @Route("/", name="job_offer_index", methods={"GET"})
+     * @Route("/", name="job_offer", methods={"GET"})
      */
     public function index(JobOfferRepository $jobOfferRepository): Response
     {
@@ -46,7 +46,7 @@ class JobOfferController extends AbstractController
             $entityManager->persist($jobOffer);
             $entityManager->flush();
 
-            return $this->redirectToRoute('job_offer_index');
+            return $this->redirectToRoute('job_offer');
         }
 
         $userCandidatId = '';
@@ -90,7 +90,7 @@ class JobOfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('job_offer_index');
+            return $this->redirectToRoute('job_offer');
         }
 
         $userCandidatId = '';
@@ -107,7 +107,7 @@ class JobOfferController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="job_offer_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="job_offer_delete", methods={"DELETE"})
      */
     public function delete(Request $request, JobOffer $jobOffer): Response
     {
@@ -123,7 +123,7 @@ class JobOfferController extends AbstractController
             $userCandidatId = $this->getUser()->getIdCandidate();
         }
 
-        return $this->redirectToRoute('job_offer_index', [
+        return $this->redirectToRoute('job_offer', [
             'userCandidatId' => $userCandidatId,
 
         ]);
