@@ -20,8 +20,14 @@ class JobOfferController extends AbstractController
      */
     public function index(JobOfferRepository $jobOfferRepository): Response
     {
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
         return $this->render('job_offer/index.html.twig', [
-            'user' => $this->getUser(),
+            'userCandidatId' => $userCandidatId,
             'job_offers' => $jobOfferRepository->findAll(),
         ]);
     }
@@ -43,9 +49,15 @@ class JobOfferController extends AbstractController
             return $this->redirectToRoute('job_offer_index');
         }
 
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
         return $this->render('job_offer/new.html.twig', [
             'job_offer' => $jobOffer,
-            'user' => $this->getUser(),
+            'userCandidatId' => $userCandidatId,
             'form' => $form->createView(),
         ]);
     }
@@ -55,9 +67,15 @@ class JobOfferController extends AbstractController
      */
     public function show(JobOffer $jobOffer): Response
     {
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
         return $this->render('job_offer/show.html.twig', [
             'job_offer' => $jobOffer,
-            'user' => $this->getUser(),
+            'userCandidatId' => $userCandidatId,
         ]);
     }
 
@@ -75,9 +93,15 @@ class JobOfferController extends AbstractController
             return $this->redirectToRoute('job_offer_index');
         }
 
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
         return $this->render('job_offer/edit.html.twig', [
             'job_offer' => $jobOffer,
-            'user' => $this->getUser(),
+            'userCandidatId' => $userCandidatId,
             'form' => $form->createView(),
         ]);
     }
@@ -93,8 +117,14 @@ class JobOfferController extends AbstractController
             $entityManager->flush();
         }
 
+        $userCandidatId = '';
+        
+        if($this->getUser()){
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
         return $this->redirectToRoute('job_offer_index', [
-            'user' => $this->getUser(),
+            'userCandidatId' => $userCandidatId,
 
         ]);
     }
