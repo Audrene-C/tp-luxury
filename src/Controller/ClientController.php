@@ -20,15 +20,15 @@ class ClientController extends AbstractController
      */
     public function index(ClientRepository $clientRepository): Response
     {
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->render('client/index.html.twig', [
             'clients' => $clientRepository->findAll(),
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
         ]);
     }
 
@@ -50,15 +50,15 @@ class ClientController extends AbstractController
             return $this->redirectToRoute('client');
         }
 
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->render('client/new.html.twig', [
             'client' => $client,
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
             'form' => $form->createView(),
         ]);
     }
@@ -68,14 +68,14 @@ class ClientController extends AbstractController
      */
     public function show(Client $client): Response
     {
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->render('client/show.html.twig', [
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
             'client' => $client,
         ]);
     }
@@ -91,17 +91,17 @@ class ClientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('client_index');
+            return $this->redirectToRoute('client');
         }
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->render('client/edit.html.twig', [
             'client' => $client,
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
             'form' => $form->createView(),
         ]);
     }
@@ -117,14 +117,14 @@ class ClientController extends AbstractController
             $entityManager->flush();
         }
 
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
-        return $this->redirectToRoute('client_index', [
-            'userCandidatId' => $userCandidatId,
+        return $this->redirectToRoute('client', [
+            'candidate' => $candidate,
         ]);
     }
 }

@@ -21,8 +21,8 @@
                         <h2 class="white-text">Create new Client</h2>
                         <span class="white-text">Welcome on board</span>
                         <ol class="breadcrumb">
-                            <li><a href="#!">Home</a></li>
-                            <li class="active">Clients</li>
+                            <li><a href="{{path('home')}}">Home</a></li>
+                            <li class="active"><a href="{{path('client')}}">Clients</a></li>
                         </ol>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                     <h3 class="text-extrabold">Create new Client</h3>
                     {{ include('client/_form.html.twig') }}
 
-                    <a href="{{ path('client_index') }}">back to list</a>
+                    <a href="{{ path('client') }}">back to list</a>
                     
 
                 </div>

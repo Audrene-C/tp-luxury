@@ -23,7 +23,7 @@ class RegistrationController extends AbstractController
     {
         if($this->getUser()) {
             return $this->redirectToRoute('home', [
-                'userCandidatId' => $this->getUser()->getIdCandidate(),
+                'candidate' => $this->getUser()->getCandidate(),
 
             ]);
         }
@@ -63,7 +63,6 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/register.html.twig', [
-            'userCandidatId' => $this->getUser()->getIdCandidate(),
             'registrationForm' => $form->createView(),
         ]);
     }

@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * User
  *
- * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C74", columns={"email"}), @ORM\UniqueConstraint(name="UNIQ_8D93D649B27CF2F3", columns={"id_candidate_id"})})
+ * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C74", columns={"email"}), @ORM\UniqueConstraint(name="UNIQ_8D93D649B27CF2F3", columns={"candidate"})})
  * @ORM\Entity
  */
 class User implements UserInterface
@@ -55,10 +55,11 @@ class User implements UserInterface
      *
      * @ORM\ManyToOne(targetEntity="Candidate")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_candidate_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="candidate", referencedColumnName="id")
      * })
      */
-    private $idCandidate;
+    private $candidate;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,11 +90,17 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles[] = 'ROLE_USER';
+
         if($this->getIsAdmin()) {
+            $roles[] = 'ROLE_CANDIDATE';
             $roles[] = 'ROLE_ADMIN';
         }
-        return $roles;
 
+        if($this->getCandidate()->getIsComplete()) {
+            $roles[] = 'ROLE_CANDIDATE';
+        }
+
+        return $roles;
     }
 
     public function setRoles(string $roles): self
@@ -144,14 +151,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getIdCandidate(): ?Candidate
+    public function getCandidate(): ?Candidate
     {
-        return $this->idCandidate;
+        return $this->candidate;
     }
 
-    public function setIdCandidate(?Candidate $idCandidate): self
+    public function setCandidate(?Candidate $candidate): self
     {
-        $this->idCandidate = $idCandidate;
+        $this->candidate = $candidate;
 
         return $this;
     }

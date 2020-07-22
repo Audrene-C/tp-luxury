@@ -15,15 +15,16 @@ class HomeController extends AbstractController
 
     {   
         $JobOffers = $jobOfferRepository->getLastJobOffers();
-        $userCandidatId = '';
+        $candidate = '';
       
       if ($this->getUser()) {
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
+            //dd($candidate);
         }
 
         return $this->render('home/index.html.twig', [
-            'userCandidatId' => $userCandidatId,
-            "jobOffers" => $JobOffers
+            'candidate' => $candidate,
+            'jobOffers' => $JobOffers
         ]);
     }
 }
