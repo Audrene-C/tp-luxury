@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class Candidate1Type extends AbstractType
 {
@@ -34,8 +36,7 @@ class Candidate1Type extends AbstractType
                 'label' => 'Do you have a passport ?',
                 'required' => false
             ])
-            ->add('cv', FileType::class , [
-                'mapped' => false,
+            ->add('cvFile', VichFileType::class , [
                 'required' => false,
                 ]
             )

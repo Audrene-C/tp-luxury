@@ -104,12 +104,11 @@
                         <div class="file-field input-field">
                             <div class="btn btn-lg primary waves-effect waves-light">
                                 <span><i class="material-icons">&#xE24D;</i> CV</span>
-                                {{ form_widget(form.cv, {'attr': {'size': '20000000', 'accept': '.pdf,.jpg,.doc,.docx,.png,.gif'}}) }}
-    
+                                {{ form_widget(form.cvFile, {'attr': {'size': '20000000', 'accept': '.pdf,.jpg,.doc,.docx,.png,.gif'}}) }}
                             </div>
     
                             <div class="existing-file">
-                                <a href="#!" target="_blank"><i class="material-icons">&#xE24D;</i> {{candidate.cv}}</a>
+                                <a href="{{ asset('assets/img/' ~ candidate.cv) }}" target="_blank"><i class="material-icons">&#xE24D;</i> {{candidate.cv}}</a>
                             </div>
                             <div class="file-path-wrapper">
                                 <input class="file-path validate" type="text" placeholder="Upload your Curriculum Vitae" readonly>

@@ -4,6 +4,10 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 
 /**
@@ -11,8 +15,9 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @ORM\Table(name="candidate", indexes={@ORM\Index(name="IDX_C8B28E44712A86AB", columns={"job_category_id"})})
  * @ORM\Entity
+ * @Vich\Uploadable
  */
-class Candidate
+class Candidate 
 {
     /**
      * @var int
@@ -71,6 +76,14 @@ class Candidate
      * @ORM\Column(name="passport", type="boolean", nullable=true, options={"default"="NULL"})
      */
     private $passport;
+
+
+    /**
+     * @Vich\UploadableField(mapping="cvFile", fileNameProperty="cv", size="cvSize")
+     * 
+     * @var File|null
+     */
+    private $cvFile;
 
     /**
      * @var string|null
@@ -220,7 +233,7 @@ class Candidate
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
-
+        
         return $this;
     }
 
@@ -232,11 +245,11 @@ class Candidate
     public function setAdress(string $adress): self
     {
         $this->adress = $adress;
-
+        
         return $this;
     }
 
-    public function getCountry(): ?string
+public function getCountry(): ?string
     {
         return $this->country;
     }
@@ -272,16 +285,48 @@ class Candidate
         return $this;
     }
 
+
+    /**
+     * If manually uploading a file (i.e not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $cvFile
+     */
+    public function setCvFile(?File $cvFile = null): void
+    {
+        $this->cvFile = $cvFile;
+
+        if(null !== $cvFile){
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getCvFile(): ?File
+    {
+        return $this->cvFile;
+    }
+
+    public function setCv(?string $cv): void
+    {
+        $this->cv = $cv;
+    }
+
     public function getCv(): ?string
     {
         return $this->cv;
     }
 
-    public function setCv(string $cv): self
+    public function setCvSize(?int $cvSize): void
     {
-        $this->cv = $cv;
+        $this->cvSize = $cvSize;
+    }
 
-        return $this;
+    public function getCvSize(): ?int
+    {
+        return $this->cvSize;
     }
 
     public function getProfilPicture(): ?string
@@ -482,4 +527,5 @@ class Candidate
 
         return $this;
     }
+
 }
