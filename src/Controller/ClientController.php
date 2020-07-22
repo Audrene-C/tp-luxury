@@ -91,7 +91,7 @@ class ClientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('client_index');
+            return $this->redirectToRoute('client');
         }
         $userCandidatId = '';
         
@@ -123,7 +123,7 @@ class ClientController extends AbstractController
             $userCandidatId = $this->getUser()->getIdCandidate();
         }
 
-        return $this->redirectToRoute('client_index', [
+        return $this->redirectToRoute('client', [
             'userCandidatId' => $userCandidatId,
         ]);
     }
