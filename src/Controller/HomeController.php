@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\JobOfferRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class HomeController extends AbstractController
 {
@@ -30,6 +31,7 @@ class HomeController extends AbstractController
 
     /**
      * @Route("/candidate/job_offers", name="show_job_offers")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function showJobOffers(JobOfferRepository $jobOfferRepository)
 
