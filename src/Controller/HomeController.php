@@ -26,4 +26,23 @@ class HomeController extends AbstractController
             "jobOffers" => $JobOffers
         ]);
     }
+
+    /**
+     * @Route("/candidate/job_offers", name="show_job_offers")
+     */
+    public function showJobOffers(JobOfferRepository $jobOfferRepository)
+
+    {   
+        $JobOffers = $jobOfferRepository->findAll();
+        $userCandidatId = '';
+      
+      if ($this->getUser()) {
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
+        return $this->render('home/showJobOffers.html.twig', [
+            'userCandidatId' => $userCandidatId,
+            "jobOffers" => $JobOffers
+        ]);
+    }
 }
