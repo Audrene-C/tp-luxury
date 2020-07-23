@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h2 class="white-text">Jobs Offers</h2>
-                        <span class="white-text">Welcome on board</span>
+                        <span class="white-text">Just like our candidates, we offer quality, serious & reliable positions. Come discover them and we will put you in contact with the perfect team for you to form the perfect crew.</span>
                         <ol class="breadcrumb">
                             <li><a href="#!">Home</a></li>
                             <li class="active">Jobs Offers</li>
@@ -26,54 +26,66 @@
 
 
         <!-- Page Content-->
-        <section class="section-padding gray-bg log-section">
-            <div class="container">
-                <div class="row">
+       <section id="job-offers" class="section-padding gray-bg">
+                <div class="container">
+                    <div class="text-center mb-40"></div>
+                    <div class="portfolio-container">
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                {#<th>Id</th>#}
-                                <th>Description</th>
-                                <th>Active</th>
-                                <th>Notes</th>
-                                <th>JobTitle</th>
-                                <th>ContractType</th>
-                                <th>Location</th>
-                                {#<th>ClosingDate</th>#}
-                                <th>Salary</th>
-                                <th>CreatedAt</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                        <ul class="portfolio-filter brand-filter text-center">
+                            <li class="active waves-effect waves-light" data-group="all">All</li>
+                            <li class=" waves-effect waves-light" data-group="retail">Retail sales</li>
+                            <li class=" waves-effect waves-light" data-group="creative">Creative</li>
+                            <li class=" waves-effect waves-light" data-group="technology">Technology</li>
+                            <li class=" waves-effect waves-light" data-group="marketing">Marketing & PR</li>
+                            <li class=" waves-effect waves-light" data-group="fashion">Fashion & luxury</li>
+                            <li class=" waves-effect waves-light" data-group="management">Management & HR</li>
+                        </ul>
+                        <div class="portfolio portfolio-with-title col-2 gutter mt-30">
+
                         {% for jobOffer in jobOffers %}
-                             <tr>
-                                <td>{{ jobOffer.id }}</td>
-                                <td>{{ jobOffer.description }}</td>
-                                <td>{{ jobOffer.active ? 'Yes' : 'No' }}</td>
-                                <td>{{ jobOffer.notes }}</td>
-                                <td>{{ jobOffer.jobTitle }}</td>
-                                <td>{{ jobOffer.contractType }}</td>
-                                <td>{{ jobOffer.location }}</td>
-                                <td>{{ jobOffer.closingDate ? jobOffer.closingDate|date('Y-m-d') : '' }}</td>
-                                <td>{{ jobOffer.salary }}</td>
-                                <td>{{ jobOffer.createdAt ? jobOffer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-
-                            </tr>
-                        {% else %}
-                            <tr>
-                                <td colspan="11">no records found</td>
-                            </tr>
+                            <div class="portfolio-item" data-groups='["all", "{{ jobOffer.jobCategory.dataGroup }}"]'>
+                                <div class="portfolio-wrapper">
+                                    <div class="card job-card">
+                                        <div class="card-content">
+                                        <span class="title">
+                                            <span class="card-title">{{ jobOffer.jobTitle }}</span>
+                                            <span class="ref grey-text">Ref. {{ jobOffer.id }}</span>
+                                        </span>
+                                            <div class="metas mb-20">
+                                                <div class="meta">
+                                                    <i class="material-icons">&#xE53E;</i>{{ jobOffer.salary }}&euro;
+                                                </div>
+                                                <div class="meta">
+                                                    <i class="material-icons">&#xE916;</i>{{ jobOffer.createdAt | date("d/m/Y") }}
+                                                </div>
+                                                <div class="meta">
+                                                    <i class="material-icons">&#xE55F;</i>{{ jobOffer.location }}
+                                                </div>
+                                            </div>
+                                            <p class="truncate-text">{{ jobOffer.description }}</p>
+                                        </div>
+                                        <div class="card-action">
+                                            <a class="btn btn-md primary border waves-effect waves-dark" href="{{ path('job_offer_show', { 'id': jobOffer.id } ) }}">Details</a>
+                                            {% if is_granted('ROLE_CANDIDATE') %}
+                                            <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         {% endfor %}
-                        </tbody>
-                    </table>
 
+                            <div class="no-item"></div>
 
-                    
+                        </div>
 
+                        <div class="text-center">
+                            <a href="{{path('job_offer')}}" class="btn gradient secondary waves-effect waves-light mt-30">View all job offers</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+
 
     </div>
 
