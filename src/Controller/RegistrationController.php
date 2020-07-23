@@ -42,7 +42,7 @@ class RegistrationController extends AbstractController
               
             );
             $candidat = new Candidate();
-            $user->setIdCandidate($candidat);
+            $user->setCandidate($candidat);
             $createdAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
             $candidat->setCreatedAt($createdAt);
             $email = $user->getEmail();

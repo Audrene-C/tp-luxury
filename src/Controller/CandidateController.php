@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Candidate;
-use App\Form\Candidate1Type;
+use App\Form\CandidateType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,7 +41,7 @@ class CandidateController extends AbstractController
     public function new(Request $request): Response
     {
         $candidate = new Candidate();
-        $form = $this->createForm(Candidate1Type::class, $candidate);
+        $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -87,9 +87,11 @@ class CandidateController extends AbstractController
      */
     public function edit(Request $request, Candidate $candidate): Response
     {
-        $form = $this->createForm(Candidate1Type::class, $candidate);
+        $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
+
         $idCandidate = $candidate->getId();
+        $pourcentage = 0;
         $progress = 0;
     
         if ($form->isSubmitted() && $form->isValid()) {
@@ -98,42 +100,41 @@ class CandidateController extends AbstractController
             $updatedAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));     
             $candidate->setUpdatedAt($updatedAt);
             
-            
-            $getCandidat = $request->request->get("candidate1");
+            $getCandidat = $request->request->get("candidate");
             foreach($getCandidat as $candidatInfo) {
                 if(!null == $candidatInfo){
                     $progress += 1;
                 }
             }
             
-            $getCandidatFiles = $request->files->get('candidate1');
+            $getCandidatFiles = $request->files->get('candidate');
             foreach($getCandidatFiles as $candidatFile) {
                 if(!null == $candidatFile['file']){
                     $progress += 1;
                 }
             }
-            // dd($progress);
-            $this->progress = round(($progress/15)*100);
+            
+            $pourcentage = round(($progress/15)*100);
+            $candidate->setPourcentage($pourcentage);
+
+            if($pourcentage >= 100) {
+                $candidate->setIsComplete(true);
+            }
             
             $entityManager->persist($candidate);
             $entityManager->flush();
+            //dd($candidate);
 
             return $this->redirectToRoute( 'candidate_edit', [
                 'id' => $idCandidate,
-                'pourcentage' => $this->progress,
+                'candidate' => $candidate,
                 ] );
-        }
-        $candidate = '';
-        
-        if($this->getUser()){
-            $candidate = $this->getUser()->getCandidate();
         }
         
         return $this->render('candidate/edit.html.twig', [
             'candidate' => $candidate,
             'form' => $form->createView(),
-            'pourcentage' => $pourcentage,
-            'candidate' => $candidate,
+            'pourcentage' => $pourcentage
         ]);
     }
     /**

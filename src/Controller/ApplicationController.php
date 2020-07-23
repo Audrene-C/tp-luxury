@@ -30,7 +30,7 @@ class ApplicationController extends AbstractController
     /**
      * @Route("/new/{candidate}/{jobOffer}", name="application_new", methods={"GET","POST"})
      */
-    public function new(Request $request, Candidate $candidate, JobOffer $jobOffer): Response
+    public function new(Candidate $candidate, JobOffer $jobOffer): Response
     {
         $application = new Application();
         $application->setCandidate($candidate);

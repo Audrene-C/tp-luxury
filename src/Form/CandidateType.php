@@ -16,15 +16,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class Candidate1Type extends AbstractType
+class CandidateType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('gender', ChoiceType::class, [
                 'choices' => [
-                    'Male' => 0,
-                    'Female' => 1,
+                    'Male' => 'male',
+                    'Female' => 'female',
+                    'Transgender' => 'transgender'
                     ]
                 ])
             ->add('firstName')

@@ -7,6 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ApplicationRepository::class)
+ * @ORM\Table(
+ *    name="application", 
+ *    uniqueConstraints={
+ *        @ORM\UniqueConstraint(name="application_unique", columns={"candidate_id", "job_offer_id"})
+ *    }
+ * )
  */
 class Application
 {
