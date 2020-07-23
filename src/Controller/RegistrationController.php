@@ -23,7 +23,7 @@ class RegistrationController extends AbstractController
     {
         if($this->getUser()) {
             return $this->redirectToRoute('home', [
-                'userCandidatId' => $this->getUser()->getIdCandidate(),
+                'candidate' => $this->getUser()->getCandidate(),
 
             ]);
         }

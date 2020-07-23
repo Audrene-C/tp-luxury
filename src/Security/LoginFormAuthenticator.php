@@ -95,8 +95,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-    // replace with home-user and change url twig for "profile/home-user"
-        return new RedirectResponse($this->urlGenerator->generate('home'));
+        $user = $token->getUser();
+        if ($user->getIsAdmin() == 1) {
+            return new RedirectResponse($this->urlGenerator->generate('dashboard'));
+        }
+        $candidate = $user->getCandidate();
+        return new RedirectResponse($this->urlGenerator->generate('candidate_edit', ['id'=>$candidate->getId()]));
     }
 
     protected function getLoginUrl()

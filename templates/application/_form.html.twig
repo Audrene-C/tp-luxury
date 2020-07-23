@@ -1,0 +1,5 @@
+{{ form_start(form) }}
+    {{ form_row(form.candidateId), {'attr': {'value': {{ candidate }} }} }}
+    {{ form_row(form.jobOfferId), {'attr': {'value': {{ job }} }} }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

@@ -23,14 +23,14 @@ class CandidateController extends AbstractController
             ->getRepository(Candidate::class)
             ->findAll();
 
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->render('candidate/index.html.twig', [
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
             'candidates' => $candidates,
         ]);
     }
@@ -52,15 +52,15 @@ class CandidateController extends AbstractController
             return $this->redirectToRoute('candidate_index');
         }
 
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->render('candidate/new.html.twig', [
             'candidate' => $candidate,
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
             'form' => $form->createView(),
         ]);
     }
@@ -70,14 +70,14 @@ class CandidateController extends AbstractController
      */
     public function show(Candidate $candidate): Response
     {
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->render('candidate/show.html.twig', [
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
             'candidate' => $candidate,
         ]);
     }
@@ -123,17 +123,17 @@ class CandidateController extends AbstractController
                 'pourcentage' => $this->progress,
                 ] );
         }
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
         
         return $this->render('candidate/edit.html.twig', [
             'candidate' => $candidate,
             'form' => $form->createView(),
-            'userCandidatId' => $userCandidatId,
             'pourcentage' => $pourcentage,
+            'candidate' => $candidate,
         ]);
     }
     /**
@@ -149,14 +149,14 @@ class CandidateController extends AbstractController
             $entityManager->flush();
         }
 
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->redirectToRoute('candidate_index', [
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
         ]);
     }
 

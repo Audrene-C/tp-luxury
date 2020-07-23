@@ -13,7 +13,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * Candidate
  *
- * @ORM\Table(name="candidate", indexes={@ORM\Index(name="IDX_C8B28E44712A86AB", columns={"job_category_id"})})
+ * @ORM\Table(name="candidate", indexes={@ORM\Index(name="IDX_C8B28E44712A86AB", columns={"job_category"})})
  * @ORM\Entity
  * @Vich\Uploadable
  */
@@ -188,7 +188,7 @@ class Candidate implements \Serializable
      *
      * @ORM\ManyToOne(targetEntity="JobCategory")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="job_category_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="job_category", referencedColumnName="id")
      * })
      */
     private $jobCategory;
@@ -244,6 +244,12 @@ class Candidate implements \Serializable
             $this->passportFile,
             ) = unserialize($serialized, array('allowed_classes' => false));
     }
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true, options={"default" : false})
+     */
+    private $isComplete;
+
 
     public function __construct()
     {
@@ -595,6 +601,7 @@ public function getCountry(): ?string
         return $this;
     }
 
+
     /**
      * If manually uploading a file (i.e not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the update. If this
@@ -629,4 +636,16 @@ public function getCountry(): ?string
 
          return $this;
      }
+
+    public function getIsComplete(): ?bool
+    {
+        return $this->isComplete;
+    }
+
+    public function setIsComplete(?bool $isComplete): self
+    {
+        $this->isComplete = $isComplete;
+
+        return $this;
+    }
 }
