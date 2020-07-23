@@ -3,49 +3,87 @@
 {% block title %}JobOffer index{% endblock %}
 
 {% block body %}
-    <h1>JobOffer index</h1>
+<div class="base">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Description</th>
-                <th>Active</th>
-                <th>Notes</th>
-                <th>JobTitle</th>
-                <th>ContractType</th>
-                <th>Location</th>
-                <th>ClosingDate</th>
-                <th>Salary</th>
-                <th>CreatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for job_offer in job_offers %}
-            <tr>
-                <td>{{ job_offer.id }}</td>
-                <td>{{ job_offer.description }}</td>
-                <td>{{ job_offer.active ? 'Yes' : 'No' }}</td>
-                <td>{{ job_offer.notes }}</td>
-                <td>{{ job_offer.jobTitle }}</td>
-                <td>{{ job_offer.contractType }}</td>
-                <td>{{ job_offer.location }}</td>
-                <td>{{ job_offer.closingDate ? job_offer.closingDate|date('Y-m-d') : '' }}</td>
-                <td>{{ job_offer.salary }}</td>
-                <td>{{ job_offer.createdAt ? job_offer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('job_offer_show', {'id': job_offer.id}) }}">show</a>
-                    <a href="{{ path('job_offer_edit', {'id': job_offer.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="11">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <!-- Page -->
+    <div class="page">
 
-    <a href="{{ path('job_offer_new') }}">Create new</a>
+        <!-- Page Header-->
+        <section class="page-title page-title-bg fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="white-text">Jobs Offers</h2>
+                        <span class="white-text">Welcome on board</span>
+                        <ol class="breadcrumb">
+                            <li><a href="#!">Home</a></li>
+                            <li class="active">Jobs Offers</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Page Content-->
+        <section class="section-padding gray-bg log-section">
+            <div class="container">
+                <div class="row">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Description</th>
+                                <th>Active</th>
+                                <th>Notes</th>
+                                <th>JobTitle</th>
+                                <th>ContractType</th>
+                                <th>Location</th>
+                                <th>ClosingDate</th>
+                                <th>Salary</th>
+                                <th>CreatedAt</th>
+                                <th>actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for job_offer in job_offers %}
+                             <tr>
+                                <td>{{ job_offer.id }}</td>
+                                <td>{{ job_offer.description }}</td>
+                                <td>{{ job_offer.active ? 'Yes' : 'No' }}</td>
+                                <td>{{ job_offer.notes }}</td>
+                                <td>{{ job_offer.jobTitle }}</td>
+                                <td>{{ job_offer.contractType }}</td>
+                                <td>{{ job_offer.location }}</td>
+                                <td>{{ job_offer.closingDate ? job_offer.closingDate|date('Y-m-d') : '' }}</td>
+                                <td>{{ job_offer.salary }}</td>
+                                <td>{{ job_offer.createdAt ? job_offer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>
+                                    <a href="{{ path('job_offer_show', {'id': job_offer.id}) }}" class="btn btn-md gradient secondary waves-effect waves-light">show</a>
+                                    <a href="{{ path('job_offer_edit', {'id': job_offer.id}) }}" class="btn btn-md gradient secondary waves-effect waves-light">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="11">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <a href="{{ path('job_offer_new') }}" class="btn btn-md primary waves-effect waves-light">Create new</a>
+
+                    
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</div>
+
+
+    
 {% endblock %}

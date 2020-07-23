@@ -33,14 +33,14 @@
         <!-- Page Content-->
         <section class="section-padding gray-bg log-section">
             <div class="container">
-                <div class="row">
-                    
-                    <h3 class="text-extrabold">Create new Client</h3>
-                    {{ include('client/_form.html.twig') }}
+                <div class="row content-client">
+                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 card card-panel">
+                        
+                        <h3 class="text-extrabold">Create new Client</h3>
+                        {{ include('client/_form.html.twig') }}
 
-                    <a href="{{ path('client') }}">back to list</a>
-                    
-
+                        <a href="{{ path('client') }}" class="btn btn-md gradient secondary waves-effect waves-light">back to list</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -49,6 +49,5 @@
 
 </div>
     
-    <a href="{{ path('client') }}">back to list</a>
 
 {% endblock %}
