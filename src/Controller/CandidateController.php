@@ -89,16 +89,39 @@ class CandidateController extends AbstractController
     {
         $form = $this->createForm(Candidate1Type::class, $candidate);
         $form->handleRequest($request);
-        $idCandidate = $this->getUser()->getIdCandidate()->getId();
-
+        $idCandidate = $candidate->getId();
+        $progress = 0;
+    
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $updatedAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));            
+            
+            $updatedAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));     
             $candidate->setUpdatedAt($updatedAt);
+            
+            
+            $getCandidat = $request->request->get("candidate1");
+            foreach($getCandidat as $candidatInfo) {
+                if(!null == $candidatInfo){
+                    $progress += 1;
+                }
+            }
+            
+            $getCandidatFiles = $request->files->get('candidate1');
+            foreach($getCandidatFiles as $candidatFile) {
+                if(!null == $candidatFile['file']){
+                    $progress += 1;
+                }
+            }
+            // dd($progress);
+            $this->progress = round(($progress/15)*100);
+            
             $entityManager->persist($candidate);
             $entityManager->flush();
 
-            return $this->redirectToRoute( 'candidate_edit', ['id' => $idCandidate]);//"candidate_edit/". $idCandidate .".html.twig");
+            return $this->redirectToRoute( 'candidate_edit', [
+                'id' => $idCandidate,
+                'pourcentage' => $this->progress,
+                ] );
         }
         $userCandidatId = '';
         
@@ -110,6 +133,7 @@ class CandidateController extends AbstractController
             'candidate' => $candidate,
             'form' => $form->createView(),
             'userCandidatId' => $userCandidatId,
+            'pourcentage' => $pourcentage,
         ]);
     }
     /**

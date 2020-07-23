@@ -206,6 +206,11 @@ class Candidate implements \Serializable
      private $passportFileUpload;
 
      /**
+      * @ORM\Column(type="integer", nullable=true)
+      */
+     private $progress;
+
+     /**
      * String representation of object
      * @link https://php.net/manual/en/serializable.serialize.php
      * @return string the string representation of the object or null
@@ -611,5 +616,17 @@ public function getCountry(): ?string
      public function getPassportFileUpload(): ?File
      {
          return $this->passportFileUpload;
+     }
+
+     public function getProgress(): ?int
+     {
+         return $this->progress;
+     }
+
+     public function setProgress(?int $progress): self
+     {
+         $this->progress = $progress;
+
+         return $this;
      }
 }

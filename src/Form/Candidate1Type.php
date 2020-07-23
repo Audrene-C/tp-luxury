@@ -68,7 +68,7 @@ class Candidate1Type extends AbstractType
                 'attr' => ['class' => 'materialize-textarea',
                             'cols' => '50',
                             'rows' => '10'],
-                'required' => false
+                'required' => false,
                 ]
             )
             ->add('passportFileUpload', VichFileType::class , [
@@ -78,6 +78,7 @@ class Candidate1Type extends AbstractType
             ->add('jobCategory', EntityType::class, [
                 // looks for choices from this entity
                 'class' => JobCategory::class,
+                'required' => false,
                 'placeholder' => 'Choose a category',
 
                 // uses the User.username property as the visible option string
