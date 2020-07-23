@@ -21,7 +21,7 @@
                         <h2 class="white-text">Register</h2>
                         <span class="white-text">Welcome on board</span>
                         <ol class="breadcrumb">
-                            <li><a href="#!">Home</a></li>
+                            <li><a href="{{path('home')}}">Home</a></li>
                             <li class="active">Register</li>
                         </ol>
                     </div>
@@ -45,7 +45,9 @@
                                     {{ form_row(registrationForm.plainPassword, {
                                         label: 'Password'
                                     }) }}
-                                    {{ form_row(registrationForm.agreeTerms) }}
+                                    
+                                    {{ form_widget(registrationForm.agreeTerms) }}
+                                    {{ form_label(registrationForm.agreeTerms, 'Agree terms') }}
                                     <button type="submit" class="btn-md btn gradient secondary waves-effect waves-light mt-30">Register</button>
                                     {{ form_end(registrationForm) }}
                                 </div>

@@ -23,14 +23,14 @@ class CandidateController extends AbstractController
             ->getRepository(Candidate::class)
             ->findAll();
 
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->render('candidate/index.html.twig', [
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
             'candidates' => $candidates,
         ]);
     }
@@ -52,15 +52,15 @@ class CandidateController extends AbstractController
             return $this->redirectToRoute('candidate_index');
         }
 
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->render('candidate/new.html.twig', [
             'candidate' => $candidate,
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
             'form' => $form->createView(),
         ]);
     }
@@ -70,14 +70,14 @@ class CandidateController extends AbstractController
      */
     public function show(Candidate $candidate): Response
     {
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->render('candidate/show.html.twig', [
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
             'candidate' => $candidate,
         ]);
     }
@@ -89,26 +89,51 @@ class CandidateController extends AbstractController
     {
         $form = $this->createForm(Candidate1Type::class, $candidate);
         $form->handleRequest($request);
-
+        $idCandidate = $candidate->getId();
+        $progress = 0;
+    
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $updatedAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));            
+            
+            $updatedAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));     
             $candidate->setUpdatedAt($updatedAt);
+            
+            
+            $getCandidat = $request->request->get("candidate1");
+            foreach($getCandidat as $candidatInfo) {
+                if(!null == $candidatInfo){
+                    $progress += 1;
+                }
+            }
+            
+            $getCandidatFiles = $request->files->get('candidate1');
+            foreach($getCandidatFiles as $candidatFile) {
+                if(!null == $candidatFile['file']){
+                    $progress += 1;
+                }
+            }
+            // dd($progress);
+            $this->progress = round(($progress/15)*100);
+            
             $entityManager->persist($candidate);
             $entityManager->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute( 'candidate_edit', [
+                'id' => $idCandidate,
+                'pourcentage' => $this->progress,
+                ] );
         }
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
         
         return $this->render('candidate/edit.html.twig', [
             'candidate' => $candidate,
             'form' => $form->createView(),
-            'userCandidatId' => $userCandidatId,
+            'pourcentage' => $pourcentage,
+            'candidate' => $candidate,
         ]);
     }
     /**
@@ -124,14 +149,14 @@ class CandidateController extends AbstractController
             $entityManager->flush();
         }
 
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->redirectToRoute('candidate_index', [
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
         ]);
     }
 

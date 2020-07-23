@@ -12,14 +12,14 @@ class DashboardController extends AbstractController
      */
     public function index()
     {
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->render('dashboard/dashboard.html.twig', [
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
 
         ]);
     }
