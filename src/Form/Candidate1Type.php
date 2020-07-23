@@ -40,8 +40,7 @@ class Candidate1Type extends AbstractType
                 'required' => false,
                 ]
             )
-            ->add('profilPicture', FileType::class , [
-                'mapped' => false,
+            ->add('profilPictureFile', VichFileType::class , [
                 'required' => false
                 ]
             )
@@ -72,8 +71,7 @@ class Candidate1Type extends AbstractType
                 'required' => false
                 ]
             )
-            ->add('passportFile', FileType::class , [
-                'mapped' => false,
+            ->add('passportFileUpload', VichFileType::class , [
                 'required' => false,
                 ]
             )

@@ -43,10 +43,10 @@
                         style="margin-top: 32px;">
                         <div class="btn btn-lg primary waves-effect waves-light">
                             <span><i class="material-icons">insert_photo</i> Photo</span>
-                            {{ form_widget(form.profilPicture, {'attr' : {'accept': '.pdf,.jpg,.doc,.docx,.png,.gif', 'size': '20000000'}}) }}
+                            {{ form_widget(form.profilPictureFile) }}
                         </div>
                         <div class="existing-file">
-                            <a href="#!" target="_blank"><i class="material-icons">&#xE24D;</i> <p>{{candidate.profilPicture}}</p> </a>
+                            <a href="{{ asset('assets/img/' ~ candidate.profilPicture) }}" target="_blank"><i class="material-icons">&#xE24D;</i> <p>{{candidate.profilPicture}}</p> </a>
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path validate" type="text" placeholder="Upload your ID photo" readonly>
@@ -91,10 +91,10 @@
                         <div class="file-field input-field">
                             <div class="btn btn-lg primary waves-effect waves-light">
                                 <span><i class="material-icons">&#xE24D;</i> Passport</span>
-                                {{ form_widget(form.passportFile, {'attr': {'size': '20000000', 'accept': '.pdf,.jpg,.doc,.docx,.png,.gif'}}) }}
+                                {{ form_widget(form.passportFileUpload) }}
                             </div>
                             <div class="existing-file">
-                                <a href="#!" target="_blank"><i class="material-icons">&#xE24D;</i> {{candidate.passportFile}}</a>
+                                <a href="{{ asset('assets/img/' ~ candidate.passportFile) }}" target="_blank"><i class="material-icons">&#xE24D;</i> {{candidate.passportFile}}</a>
                             </div>
                             <div class="file-path-wrapper">
                                 <input class="file-path validate" type="text" placeholder="Upload your passport" readonly>

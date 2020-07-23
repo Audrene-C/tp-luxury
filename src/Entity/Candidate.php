@@ -17,7 +17,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity
  * @Vich\Uploadable
  */
-class Candidate 
+class Candidate implements \Serializable
 {
     /**
      * @var int
@@ -79,7 +79,7 @@ class Candidate
 
 
     /**
-     * @Vich\UploadableField(mapping="cvFile", fileNameProperty="cv", size="cvSize")
+     * @Vich\UploadableField(mapping="cvFile", fileNameProperty="cv")
      * 
      * @var File|null
      */
@@ -91,6 +91,13 @@ class Candidate
      * @ORM\Column(name="cv", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $cv;
+
+    /**
+    * @Vich\UploadableField(mapping="profilPictureFile", fileNameProperty="profilPicture")
+    * 
+    * @var File|null
+    */
+    private $profilPictureFile;
 
     /**
      * @var string|null
@@ -190,6 +197,48 @@ class Candidate
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $passportFile;
+
+    /**
+     * @Vich\UploadableField(mapping="passportFileUpload", fileNameProperty="passportFile")
+     *
+     * @var File|null
+     */
+     private $passportFileUpload;
+
+     /**
+     * String representation of object
+     * @link https://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->cv,
+            $this->profilPicture,
+            $this->passportFile,
+        ));
+    }
+
+    /**
+     * Constructs the object
+     * @link https://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->cv,
+            $this->profilPicture,
+            $this->passportFile,
+            ) = unserialize($serialized, array('allowed_classes' => false));
+    }
 
     public function __construct()
     {
@@ -319,15 +368,28 @@ public function getCountry(): ?string
         return $this->cv;
     }
 
-    public function setCvSize(?int $cvSize): void
-    {
-        $this->cvSize = $cvSize;
-    }
-
-    public function getCvSize(): ?int
-    {
-        return $this->cvSize;
-    }
+    /**
+     * If manually uploading a file (i.e not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $profilPictureFile
+     */
+     public function setProfilPictureFile(?File $profilPictureFile = null): void
+     {
+         $this->profilPictureFile = $profilPictureFile;
+ 
+         if(null !== $profilPictureFile){
+             $this->updatedAt = new \DateTimeImmutable();
+         }
+     }
+ 
+     public function getProfilPictureFile(): ?File
+     {
+         return $this->profilPictureFile;
+     }
 
     public function getProfilPicture(): ?string
     {
@@ -528,4 +590,26 @@ public function getCountry(): ?string
         return $this;
     }
 
+    /**
+     * If manually uploading a file (i.e not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $passportFileUpload
+     */
+     public function setPassportFileUpload(?File $passportFileUpload = null): void
+     {
+         $this->passportFileUpload = $passportFileUpload;
+ 
+         if(null !== $passportFileUpload){
+             $this->updatedAt = new \DateTimeImmutable();
+         }
+     }
+ 
+     public function getPassportFileUpload(): ?File
+     {
+         return $this->passportFileUpload;
+     }
 }

@@ -89,6 +89,7 @@ class CandidateController extends AbstractController
     {
         $form = $this->createForm(Candidate1Type::class, $candidate);
         $form->handleRequest($request);
+        $idCandidate = $this->getUser()->getIdCandidate()->getId();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -97,7 +98,7 @@ class CandidateController extends AbstractController
             $entityManager->persist($candidate);
             $entityManager->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute( 'candidate_edit', ['id' => $idCandidate]);//"candidate_edit/". $idCandidate .".html.twig");
         }
         $userCandidatId = '';
         
