@@ -19,3 +19,12 @@ position: relative;
     top: -50px;
     left: 245px;
 }
+
+
+.content-client{
+    height: 800px;
+}
+
+select {
+    display: inline-block!important;
+}
