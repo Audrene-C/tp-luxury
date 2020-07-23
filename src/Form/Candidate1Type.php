@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class Candidate1Type extends AbstractType
 {
@@ -34,13 +36,11 @@ class Candidate1Type extends AbstractType
                 'label' => 'Do you have a passport ?',
                 'required' => false
             ])
-            ->add('cv', FileType::class , [
-                'mapped' => false,
+            ->add('cvFile', VichFileType::class , [
                 'required' => false,
                 ]
             )
-            ->add('profilPicture', FileType::class , [
-                'mapped' => false,
+            ->add('profilPictureFile', VichFileType::class , [
                 'required' => false
                 ]
             )
@@ -68,17 +68,17 @@ class Candidate1Type extends AbstractType
                 'attr' => ['class' => 'materialize-textarea',
                             'cols' => '50',
                             'rows' => '10'],
-                'required' => false
+                'required' => false,
                 ]
             )
-            ->add('passportFile', FileType::class , [
-                'mapped' => false,
+            ->add('passportFileUpload', VichFileType::class , [
                 'required' => false,
                 ]
             )
             ->add('jobCategory', EntityType::class, [
                 // looks for choices from this entity
                 'class' => JobCategory::class,
+                'required' => false,
                 'placeholder' => 'Choose a category',
 
                 // uses the User.username property as the visible option string
