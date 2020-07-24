@@ -31,7 +31,7 @@ class Candidate implements \Serializable
     /**
      * @var bool|null
      *
-     * @ORM\Column(name="gender", type="boolean", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="gender", type="string", nullable=true, options={"default"="NULL"})
      */
     private $gender;
 
@@ -206,9 +206,9 @@ class Candidate implements \Serializable
      private $passportFileUpload;
 
      /**
-      * @ORM\Column(type="integer", nullable=true)
+      * @ORM\Column(type="integer", nullable=false, options={"default"=0})
       */
-     private $progress;
+     private $pourcentage;
 
      /**
      * String representation of object
@@ -261,12 +261,12 @@ class Candidate implements \Serializable
         return $this->id;
     }
 
-    public function getGender(): ?bool
+    public function getGender(): ?string
     {
         return $this->gender;
     }
 
-    public function setGender(bool $gender): self
+    public function setGender(string $gender): self
     {
         $this->gender = $gender;
 
@@ -625,14 +625,14 @@ public function getCountry(): ?string
          return $this->passportFileUpload;
      }
 
-     public function getProgress(): ?int
+     public function getPourcentage(): ?int
      {
-         return $this->progress;
+         return $this->pourcentage;
      }
 
-     public function setProgress(?int $progress): self
+     public function setPourcentage(?int $pourcentage): self
      {
-         $this->progress = $progress;
+         $this->pourcentage = $pourcentage;
 
          return $this;
      }

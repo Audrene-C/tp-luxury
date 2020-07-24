@@ -27,16 +27,25 @@
             <div class="row"  style="background-color: lightgray;">
                     <div class="score-container">
                         <h4>
+                        {% if candidate.isComplete == 1 %}
                             <img src="https://i.imgur.com/s9bPVaK.gif" style="height: 80px; width: 201px;"> &nbsp;
                             &nbsp; Hooray ! Your profile is complete.
+                        {% endif %}
                         </h4>
                         <div class="c100 p100 small ">
-                            <span>{{ pourcentage }}%</span>
+                            <span>{{ candidate.pourcentage }}%</span>
                             <div class="slice">
-                            {# if pas complet  #}
                             
+                            {% if candidate.pourcentage < 50 %}
+                                <div class=""></div>
+                                <div class=""></div>
+                            {% elseif candidate.pourcentage >= 50 and candidate.pourcentage < 100 %}
+                                <div class=""></div>
+                                <div class="fill"></div>
+                            {% elseif candidate.pourcentage >= 100 %}
                                 <div class="bar"></div>
                                 <div class="fill"></div>
+                            {% endif %}
                             </div>
                         </div>
                     </div>
