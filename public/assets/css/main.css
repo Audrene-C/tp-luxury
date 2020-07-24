@@ -2903,3 +2903,8 @@ Vertical Tab
     }
 }
 .fa.fa-eye.show-password.active{display: none;}
+
+.unclickable:hover {
+    cursor: default!important;
+    color: black!important;
+}

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ApplicationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\JobOfferRepository;
@@ -12,20 +13,28 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(JobOfferRepository $jobOfferRepository)
+    public function index(JobOfferRepository $jobOfferRepository, ApplicationRepository $applicationRepository)
 
     {   
         $JobOffers = $jobOfferRepository->getLastJobOffers();
         $candidate = '';
-      
-      if ($this->getUser()) {
+        $applications = [];
+        $myApplications = [];
+        
+        if ($this->getUser()) {
             $candidate = $this->getUser()->getCandidate();
-            //dd($candidate);
+            //$applications[$applicationRepository->findBy(['candidate' => $candidate->getId()])] = true;
+            $applications = $applicationRepository->findBy(['candidate' => $candidate->getId()]);
+
+            foreach($applications as $application) {
+                $myApplications[$application->getJobOffer()->getId()] = true;
+            }
         }
 
         return $this->render('home/index.html.twig', [
             'candidate' => $candidate,
-            'jobOffers' => $JobOffers
+            'jobOffers' => $JobOffers,
+            'applications' => $myApplications
         ]);
     }
 

@@ -30,7 +30,6 @@ class Application
 
     /**
      * @ORM\ManyToOne(targetEntity=JobOffer::class)
-     * TODO couple job/candidate unique et bouton apply grisé
      */
     private $jobOffer;
 
