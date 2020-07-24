@@ -3,63 +3,89 @@
 {% block title %}Candidate index{% endblock %}
 
 {% block body %}
-    <h1>Candidate index</h1>
+<div class="base">
 
-    <table class="table">
+    <!-- Page -->
+    <div class="page">
+
+        <!-- Page Header-->
+        <section class="page-title page-title-bg fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="white-text">Candidats List</h2>
+                        <span class="white-text">Welcome on board</span>
+                        <ol class="breadcrumb">
+                            <li><a href="#!">Home</a></li>
+                            <li class="active">Candidats</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Page Content-->
+        <section class="section-padding gray-bg log-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12" style="width:auto;">
+                        
+                        <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                {#<th>Id</th>#}
                 <th>Gender</th>
                 <th>FirstName</th>
                 <th>LastName</th>
                 <th>Adress</th>
                 <th>Country</th>
-                <th>Nationality</th>
-                <th>Passport</th>
+                {#<th>Nationality</th>#}
+                {#<th>Passport</th>#}
                 <th>Cv</th>
-                <th>ProfilPicture</th>
-                <th>CurrentLocation</th>
+                {#<th>ProfilPicture</th>#}
+                {#<th>CurrentLocation</th>#}
                 <th>DateOfBirth</th>
-                <th>PlaceOfBirth</th>
+                {#<th>PlaceOfBirth</th>#}
                 <th>Email</th>
-                <th>Availability</th>
+                {#<th>Availability</th>#}
                 <th>Experience</th>
-                <th>Description</th>
-                <th>Notes</th>
+                {#<th>Description</th>#}
+                {#<th>Notes</th>#}
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
                 <th>DeletedAt</th>
-                <th>actions</th>
+                {#<th>actions</th>#}
             </tr>
         </thead>
         <tbody>
             {% for candidate in candidates %}
             <tr>
-                <td>
-                    <a href="{{ path('candidate_show', {'id': candidate.id}) }}">show</a>
-                    <a href="{{ path('candidate_edit', {'id': candidate.id}) }}">edit</a>
-                </td>
-                <td>{{ candidate.id }}</td>
+                {#<td>{{ candidate.id }}</td>#}
                 <td>{{ candidate.gender ? 'Yes' : 'No' }}</td>
                 <td>{{ candidate.firstName }}</td>
                 <td>{{ candidate.lastName }}</td>
                 <td>{{ candidate.adress }}</td>
                 <td>{{ candidate.country }}</td>
-                <td>{{ candidate.nationality }}</td>
-                <td>{{ candidate.passport ? 'Yes' : 'No' }}</td>
+                {#<td>{{ candidate.nationality }}</td>#}
+                {#<td>{{ candidate.passport ? 'Yes' : 'No' }}</td>#}
                 <td>{{ candidate.cv }}</td>
-                <td>{{ candidate.profilPicture }}</td>
-                <td>{{ candidate.currentLocation }}</td>
+                {#<td>{{ candidate.profilPicture }}</td>#}
+                {#<td>{{ candidate.currentLocation }}</td>#}
                 <td>{{ candidate.dateOfBirth ? candidate.dateOfBirth|date('Y-m-d') : '' }}</td>
-                <td>{{ candidate.placeOfBirth }}</td>
+                {#<td>{{ candidate.placeOfBirth }}</td>#}
                 <td>{{ candidate.email }}</td>
-                <td>{{ candidate.availability ? 'Yes' : 'No' }}</td>
-                <td>{{ candidate.experience }}</td>
-                <td>{{ candidate.description }}</td>
-                <td>{{ candidate.notes }}</td>
+                {#<td>{{ candidate.availability ? 'Yes' : 'No' }}</td>#}
+                {#<td>{{ candidate.experience }}</td>#}
+                {#<td>{{ candidate.description }}</td>#}
+                {#<td>{{ candidate.notes }}</td>#}
                 <td>{{ candidate.createdAt ? candidate.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ candidate.updatedAt ? candidate.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ candidate.deletedAt ? candidate.deletedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('candidate_show', {'id': candidate.id}) }}">show</a>
+                    <a href="{{ path('candidate_edit', {'id': candidate.id}) }}">edit</a>
+                </td>
             </tr>
         {% else %}
             <tr>
@@ -70,4 +96,15 @@
     </table>
 
     <a href="{{ path('candidate_new') }}">Create new</a>
+                    
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</div>
+
+    
 {% endblock %}

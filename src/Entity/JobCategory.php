@@ -34,6 +34,11 @@ class JobCategory
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $dataGroup;
+
     // public function __toString()
     // {
     //     return $this->category;
@@ -155,4 +160,16 @@ class JobCategory
 
     //     return $this;
     // }
+
+    public function getDataGroup(): ?string
+    {
+        return $this->dataGroup;
+    }
+
+    public function setDataGroup(?string $dataGroup): self
+    {
+        $this->dataGroup = $dataGroup;
+
+        return $this;
+    }
 }

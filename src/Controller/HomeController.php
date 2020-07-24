@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\JobOffer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\JobOfferRepository;
@@ -14,16 +13,37 @@ class HomeController extends AbstractController
      */
     public function index(JobOfferRepository $jobOfferRepository)
 
-        
+    {   
         $JobOffers = $jobOfferRepository->getLastJobOffers();
-        $userCandidatId = '';
+        $candidate = '';
       
-      if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+      if ($this->getUser()) {
+            $candidate = $this->getUser()->getCandidate();
+            //dd($candidate);
         }
 
         return $this->render('home/index.html.twig', [
+            'candidate' => $candidate,
+            'jobOffers' => $JobOffers
+        ]);
+    }
+
+    /**
+     * @Route("/candidate/job_offers", name="show_job_offers")
+     */
+    public function showJobOffers(JobOfferRepository $jobOfferRepository)
+
+    {   
+        $JobOffers = $jobOfferRepository->findAll();
+        $userCandidatId = '';
+      
+      if ($this->getUser()) {
+            $userCandidatId = $this->getUser()->getIdCandidate();
+        }
+
+        return $this->render('home/showJobOffers.html.twig', [
             'userCandidatId' => $userCandidatId,
             "jobOffers" => $JobOffers
-
+        ]);
+    }
 }

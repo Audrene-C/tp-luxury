@@ -20,14 +20,14 @@ class JobOfferController extends AbstractController
      */
     public function index(JobOfferRepository $jobOfferRepository): Response
     {
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->render('job_offer/index.html.twig', [
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
             'job_offers' => $jobOfferRepository->findAll(),
         ]);
     }
@@ -49,15 +49,15 @@ class JobOfferController extends AbstractController
             return $this->redirectToRoute('job_offer');
         }
 
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->render('job_offer/new.html.twig', [
             'job_offer' => $jobOffer,
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
             'form' => $form->createView(),
         ]);
     }
@@ -67,15 +67,15 @@ class JobOfferController extends AbstractController
      */
     public function show(JobOffer $jobOffer): Response
     {
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->render('job_offer/show.html.twig', [
             'job_offer' => $jobOffer,
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
         ]);
     }
 
@@ -93,15 +93,15 @@ class JobOfferController extends AbstractController
             return $this->redirectToRoute('job_offer');
         }
 
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->render('job_offer/edit.html.twig', [
             'job_offer' => $jobOffer,
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
             'form' => $form->createView(),
         ]);
     }
@@ -117,14 +117,14 @@ class JobOfferController extends AbstractController
             $entityManager->flush();
         }
 
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         return $this->redirectToRoute('job_offer', [
-            'userCandidatId' => $userCandidatId,
+            'candidate' => $candidate,
 
         ]);
     }

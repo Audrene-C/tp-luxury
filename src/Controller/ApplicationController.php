@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Application;
+use App\Entity\Candidate;
+use App\Entity\JobOffer;
 use App\Form\ApplicationType;
 use App\Repository\ApplicationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/application")
+ * @Route("/admin/application")
  */
 class ApplicationController extends AbstractController
 {
@@ -26,26 +28,19 @@ class ApplicationController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="application_new", methods={"GET","POST"})
+     * @Route("/new/{candidate}/{jobOffer}", name="application_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Candidate $candidate, JobOffer $jobOffer): Response
     {
         $application = new Application();
-        $form = $this->createForm(ApplicationType::class, $application);
-        $form->handleRequest($request);
+        $application->setCandidate($candidate);
+        $application->setJobOffer($jobOffer);
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($application);
+        $entityManager->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($application);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('application');
-        }
-
-        return $this->render('application/new.html.twig', [
-            'application' => $application,
-            'form' => $form->createView(),
-        ]);
+        return $this->redirectToRoute('home');
     }
 
     /**

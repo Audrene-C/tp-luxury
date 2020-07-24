@@ -18,10 +18,10 @@ class SecurityController extends AbstractController
         //     return $this->redirectToRoute('target_path');
         // }
 
-        $userCandidatId = '';
+        $candidate = '';
         
         if($this->getUser()){
-            $userCandidatId = $this->getUser()->getIdCandidate();
+            $candidate = $this->getUser()->getCandidate();
         }
 
         // get the login error if there is one
@@ -32,7 +32,7 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', 
         ['last_username' => $lastUsername, 
         'error' => $error,
-        'userCandidatId' => $userCandidatId,
+        'candidate' => $candidate,
         ]);
     }
 
