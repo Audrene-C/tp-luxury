@@ -47,6 +47,7 @@ class RegistrationController extends AbstractController
             $candidat->setCreatedAt($createdAt);
             $email = $user->getEmail();
             $candidat->setEmail($email);
+            $candidat->setPourcentage(0);
             // dd($user);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($candidat);

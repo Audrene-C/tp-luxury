@@ -8,14 +8,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
- * @Route("/admin/candidate")
+ * @Route("/candidate")
  */
 class CandidateController extends AbstractController
 {
     /**
      * @Route("/", name="candidate", methods={"GET"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(): Response
     {
@@ -60,13 +62,13 @@ class CandidateController extends AbstractController
 
         return $this->render('candidate/new.html.twig', [
             'candidate' => $candidate,
-            'candidate' => $candidate,
             'form' => $form->createView(),
         ]);
     }
 
     /**
      * @Route("/{id}", name="candidate_show", methods={"GET"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function show(Candidate $candidate): Response
     {
@@ -82,8 +84,70 @@ class CandidateController extends AbstractController
         ]);
     }
 
+    public function getProfilePourcentage(Candidate $candidate) 
+    {
+        $progress = 0;
+
+        if(!null == $candidate->getGender()) {
+            $progress += 1;
+        }
+        if(!null == $candidate->getFirstName()) {
+            $progress += 1;
+        }
+        if(!null == $candidate->getLastName()) {
+            $progress += 1;
+        }
+        if(!null == $candidate->getAdress()) {
+            $progress += 1;
+        }
+        if(!null == $candidate->getCountry()) {
+            $progress += 1;
+        }
+        if(!null == $candidate->getNationality()) {
+            $progress += 1;
+        }
+        if(!null == $candidate->getPassport()) {
+            $progress += 1;
+        }
+        if(!null == $candidate->getCv()) {
+            $progress += 1;
+        }
+        if(!null == $candidate->getProfilPicture()) {
+            $progress += 1;
+        }
+        if(!null == $candidate->getCurrentLocation()) {
+            $progress += 1;
+        }
+        if(!null == $candidate->getDateOfBirth()) {
+            $progress += 1;
+        }
+        if(!null == $candidate->getPlaceOfBirth()) {
+            $progress += 1;
+        }
+        if(!null == $candidate->getEmail()) {
+            $progress += 1;
+        }
+        if(!null == $candidate->getAvailability()) {
+            $progress += 1;
+        }
+        if(!null == $candidate->getExperience()) {
+            $progress += 1;
+        }
+        if(!null == $candidate->getDescription()) {
+            $progress += 1;
+        }
+        if(!null == $candidate->getJobCategory()) {
+            $progress += 1;
+        }
+
+        $pourcentage = round(($progress/17)*100);
+        $candidate->setPourcentage($pourcentage);
+        return $pourcentage;
+    }
+
     /**
      * @Route("/edit/{id}", name="candidate_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
      */
     public function edit(Request $request, Candidate $candidate): Response
     {
@@ -91,8 +155,6 @@ class CandidateController extends AbstractController
         $form->handleRequest($request);
 
         $idCandidate = $candidate->getId();
-        $pourcentage = 0;
-        $progress = 0;
     
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -100,36 +162,22 @@ class CandidateController extends AbstractController
             $updatedAt = new \DateTime('now', new \DateTimeZone('Europe/Paris'));     
             $candidate->setUpdatedAt($updatedAt);
             
-            $getCandidat = $request->request->get("candidate");
-            foreach($getCandidat as $candidatInfo) {
-                if(!null == $candidatInfo){
-                    $progress += 1;
-                }
-            }
-            
-            $getCandidatFiles = $request->files->get('candidate');
-            foreach($getCandidatFiles as $candidatFile) {
-                if(!null == $candidatFile['file']){
-                    $progress += 1;
-                }
-            }
-            
-            $pourcentage = round(($progress/15)*100);
-            $candidate->setPourcentage($pourcentage);
-
-            if($pourcentage >= 100) {
+            $pourcentage = $this->getProfilePourcentage($candidate);
+            if(round($pourcentage) >= 100) {
                 $candidate->setIsComplete(true);
             }
-            
+
             $entityManager->persist($candidate);
             $entityManager->flush();
-            //dd($candidate);
-
+    
             return $this->redirectToRoute( 'candidate_edit', [
                 'id' => $idCandidate,
                 'candidate' => $candidate,
-                ] );
+                'pourcentage' => $pourcentage
+                ]);
         }
+
+        $pourcentage = $this->getProfilePourcentage($candidate);
         
         return $this->render('candidate/edit.html.twig', [
             'candidate' => $candidate,
@@ -137,8 +185,10 @@ class CandidateController extends AbstractController
             'pourcentage' => $pourcentage
         ]);
     }
+
     /**
      * @Route("/delete/{id}", name="candidate_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Candidate $candidate): Response
     {
@@ -160,5 +210,6 @@ class CandidateController extends AbstractController
             'candidate' => $candidate,
         ]);
     }
+
 
 }
